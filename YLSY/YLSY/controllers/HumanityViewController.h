@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class HumanityThumbView;
+
 @interface HumanityViewController : UIViewController
 {
     UIImageView *leftArrowView;
     UIImageView *rightArrowView;
+    
+    HumanityThumbView *oneThumbView;
+    HumanityThumbView *twoThumbView;
+    HumanityThumbView *threeThumbView;
+    
 }
 @end

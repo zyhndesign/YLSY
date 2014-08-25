@@ -7,6 +7,7 @@
 //
 
 #import "HumanityViewController.h"
+#import "../UIView/HumanityThumbView.h"
 
 @interface HumanityViewController ()
 
@@ -35,6 +36,18 @@
     rightArrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightArrow"]];
     rightArrowView.frame = CGRectMake(900, 380, 45, 44);
     [self.view addSubview:rightArrowView];
+    
+    oneThumbView = [[HumanityThumbView alloc] initWithFrame:CGRectMake(200, 230, 201, 300)];
+    oneThumbView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:oneThumbView];
+    
+    twoThumbView = [[HumanityThumbView alloc] initWithFrame:CGRectMake(426, 230, 201, 300)];
+    twoThumbView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:twoThumbView];
+    
+    threeThumbView = [[HumanityThumbView alloc] initWithFrame:CGRectMake(642, 230, 201, 300)];
+    threeThumbView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:threeThumbView];
 }
 
 - (void)didReceiveMemoryWarning
