@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class ArticleThumbView;
+
 @interface SceneViewController : UIViewController
 {
     UIImageView *leftArrowView;
     UIImageView *rightArrowView;
+    
+    ArticleThumbView *oneThumbView;
+    ArticleThumbView *twoThumbView;
+    ArticleThumbView *threeThumbView;
 }
 @end

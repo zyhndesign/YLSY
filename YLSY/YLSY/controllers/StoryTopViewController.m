@@ -35,7 +35,7 @@
     titleLayer.position = CGPointMake(0.0, 0.0);
     titleLayer.anchorPoint = CGPointMake(0.5, 0.5);
     titleLayer.bounds = CGRectMake(0, 0, 600, 198);
-    titleLayer.frame = CGRectMake(312, 200, 600, 198);
+    titleLayer.frame = CGRectMake(212, 200, 600, 198);
     [self.view.layer addSublayer:titleLayer];
     
     UIImage *imageRoom = [UIImage imageNamed:@"storyRoom"];

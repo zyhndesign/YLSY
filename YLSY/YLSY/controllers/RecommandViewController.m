@@ -7,6 +7,7 @@
 //
 
 #import "RecommandViewController.h"
+#import "../UIView/ArticleThumbView.h"
 
 @interface RecommandViewController ()
 
@@ -54,6 +55,17 @@
     rightArrowView.frame = CGRectMake(900, 380, 45, 44);
     [self.view addSubview:rightArrowView];
     
+    oneThumbView = [[ArticleThumbView alloc] initWithFrame:CGRectMake(200, 230, 164, 328)];
+    oneThumbView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:oneThumbView];
+    
+    twoThumbView = [[ArticleThumbView alloc] initWithFrame:CGRectMake(430, 230, 164, 328)];
+    twoThumbView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:twoThumbView];
+    
+    threeThumbView = [[ArticleThumbView alloc] initWithFrame:CGRectMake(660, 230, 164, 328)];
+    threeThumbView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:threeThumbView];
 }
 
 - (void)didReceiveMemoryWarning

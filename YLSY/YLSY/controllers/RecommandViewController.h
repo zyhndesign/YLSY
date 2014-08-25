@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class ArticleThumbView;
+
 @interface RecommandViewController : UIViewController
 {
     CALayer *backgroundLayer;
     CALayer *titleLayer;
     UIImageView *leftArrowView;
     UIImageView *rightArrowView;
+    
+    ArticleThumbView *oneThumbView;
+    ArticleThumbView *twoThumbView;
+    ArticleThumbView *threeThumbView;
 }
 @end

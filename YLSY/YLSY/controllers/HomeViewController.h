@@ -23,6 +23,8 @@
     BOOL cloud2SwingAnimated;
     BOOL cloud3SwingAnimated;
     BOOL cloud4SwingAnimated;
+    
+    CALayer *articleMapLayer;
 }
 
 -(void) executeScrollMap:(float)position;

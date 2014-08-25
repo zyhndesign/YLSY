@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UIImage *backgroundImage = [UIImage imageNamed:@""];
+    UIImage *backgroundImage = [UIImage imageNamed:@"historyBackground"];
     self.view.layer.contents = (__bridge id)[backgroundImage CGImage];
     
 }

@@ -19,6 +19,7 @@
 		D504D18119AACADA00464770 /* StoryTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D504D18019AACADA00464770 /* StoryTopViewController.m */; };
 		D504D18419AACB0000464770 /* BottomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D504D18319AACB0000464770 /* BottomViewController.m */; };
 		D50BDEE119A6ECC200BA90E6 /* POPAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D50BDEE019A6ECC200BA90E6 /* POPAnimationManager.m */; };
+		D535A3E819AB2F53006198CE /* HumanityThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = D535A3E719AB2F53006198CE /* HumanityThumbView.m */; };
 		D5B8A33119A5DCEE0088DE32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B8A33019A5DCEE0088DE32 /* Foundation.framework */; };
 		D5B8A33319A5DCEE0088DE32 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B8A33219A5DCEE0088DE32 /* CoreGraphics.framework */; };
 		D5B8A33519A5DCEE0088DE32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B8A33419A5DCEE0088DE32 /* UIKit.framework */; };
@@ -92,6 +93,8 @@
 		D504D18319AACB0000464770 /* BottomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomViewController.m; sourceTree = "<group>"; };
 		D50BDEDF19A6ECC200BA90E6 /* POPAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPAnimationManager.h; sourceTree = "<group>"; };
 		D50BDEE019A6ECC200BA90E6 /* POPAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POPAnimationManager.m; sourceTree = "<group>"; };
+		D535A3E619AB2F53006198CE /* HumanityThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanityThumbView.h; sourceTree = "<group>"; };
+		D535A3E719AB2F53006198CE /* HumanityThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HumanityThumbView.m; sourceTree = "<group>"; };
 		D5B8A32D19A5DCEE0088DE32 /* YLSY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLSY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B8A33019A5DCEE0088DE32 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D5B8A33219A5DCEE0088DE32 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -200,6 +203,8 @@
 			children = (
 				D504D16719AABFF400464770 /* ArticleThumbView.h */,
 				D504D16819AABFF400464770 /* ArticleThumbView.m */,
+				D535A3E619AB2F53006198CE /* HumanityThumbView.h */,
+				D535A3E719AB2F53006198CE /* HumanityThumbView.m */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 				D5B8A3B619A5E32C0088DE32 /* POPSpringAnimation.mm in Sources */,
 				D5B8A3B019A5E32C0088DE32 /* POPCustomAnimation.mm in Sources */,
 				D5B8A3AD19A5E32C0088DE32 /* POPAnimator.mm in Sources */,
+				D535A3E819AB2F53006198CE /* HumanityThumbView.m in Sources */,
 				D5B8A3AC19A5E32C0088DE32 /* POPAnimationTracer.mm in Sources */,
 				D504D18419AACB0000464770 /* BottomViewController.m in Sources */,
 				D5B8A33D19A5DCEE0088DE32 /* main.m in Sources */,

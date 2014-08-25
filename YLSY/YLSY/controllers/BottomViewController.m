@@ -39,7 +39,7 @@
     [self.view.layer addSublayer:imageLayer];
     
     downloadImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"download"]];
-    downloadImageView.frame = CGRectMake(450, 30, 124, 22);
+    downloadImageView.frame = CGRectMake(378, 30, 247, 43);
     [self.view addSubview:downloadImageView];
     
     copyRightLabel = [[UILabel alloc]initWithFrame:CGRectMake(352, 200, 300, 40)];

@@ -114,6 +114,14 @@
     arrowLayer.bounds = CGRectMake(0, 0, 45, 45);
     arrowLayer.frame = CGRectMake(467, 700, 45, 45);
     [self.view.layer addSublayer:arrowLayer];
+    
+    articleMapLayer = [CALayer layer];
+    articleMapLayer.contents = (__bridge id)[mapImage CGImage];
+    articleMapLayer.position = CGPointMake(0.0, 0.0);
+    articleMapLayer.anchorPoint = CGPointMake(0.5, 0.5);
+    articleMapLayer.bounds = CGRectMake(0, 0, 1024, 768);
+    articleMapLayer.frame = CGRectMake(0, 768, 1024, 768);
+    [self.view.layer addSublayer:articleMapLayer];
 }
 
 -(void)performAnimation:(CALayer *)layer
