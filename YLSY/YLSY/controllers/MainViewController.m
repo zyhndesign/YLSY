@@ -104,7 +104,7 @@
     
     viewHeight += storyViewController.view.frame.size.height;
     bottomViewController = [[BottomViewController alloc] init];
-    bottomViewController.view.frame = CGRectMake(0, viewHeight, 1024, 438);
+    bottomViewController.view.frame = CGRectMake(0, viewHeight, 1024, 290);
     [mainScrollView addSubview:bottomViewController.view];
     [self addChildViewController:bottomViewController];
     
