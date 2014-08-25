@@ -55,7 +55,6 @@
     [self addChildViewController:recommandViewController];
     
     viewHeight += recommandViewController.view.frame.size.height;
-    
     historyTopViewController = [[HistoryTopViewController alloc] init];
     historyTopViewController.view.frame = CGRectMake(0, viewHeight, 1024, 768);
     [mainScrollView addSubview:historyTopViewController.view];
@@ -75,7 +74,7 @@
     
     viewHeight += sceneTopViewController.view.frame.size.height;
     sceneViewController = [[SceneViewController alloc] init];
-    recommandViewController.view.frame = CGRectMake(0, viewHeight, 1024, 768);
+    sceneViewController.view.frame = CGRectMake(0, viewHeight, 1024, 768);
     [mainScrollView addSubview:sceneViewController.view];
     [self addChildViewController:sceneViewController];
     
@@ -84,12 +83,6 @@
     humanityTopViewController.view.frame = CGRectMake(0, viewHeight, 1024, 768);
     [mainScrollView addSubview:humanityTopViewController.view];
     [self addChildViewController:humanityTopViewController];
-    
-    viewHeight += humanityTopViewController.view.frame.size.height;
-    humanityViewController = [[HumanityViewController alloc] init];
-    humanityViewController.view.frame = CGRectMake(0, viewHeight, 1024, 768);
-    [mainScrollView addSubview:humanityViewController.view];
-    [self addChildViewController:humanityViewController];
     
     viewHeight += humanityTopViewController.view.frame.size.height;
     humanityViewController = [[HumanityViewController alloc] init];
@@ -111,10 +104,11 @@
     
     viewHeight += storyViewController.view.frame.size.height;
     bottomViewController = [[BottomViewController alloc] init];
-    bottomViewController.view.frame = CGRectMake(0, viewHeight, 1024, 368);
+    bottomViewController.view.frame = CGRectMake(0, viewHeight, 1024, 438);
     [mainScrollView addSubview:bottomViewController.view];
     [self addChildViewController:bottomViewController];
     
+    viewHeight += bottomViewController.view.frame.size.height;
     mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width, viewHeight);
     
     mainScrollView.bounces = NO;
@@ -140,7 +134,7 @@
     if (newContentOffsetY < 768)
     {
         CGFloat diff = newContentOffsetY - oldContentOffsetY;
-        [homeViewController executeScrollMap:diff];
+        //[homeViewController executeScrollMap:diff];
     }
     
 }

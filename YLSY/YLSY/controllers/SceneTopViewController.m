@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor colorWithRed:228 green:0 blue:18 alpha:1];
+    self.view.backgroundColor = [UIColor colorWithRed:254 green:0 blue:0 alpha:1];
     
     UIImage *titleImage = [UIImage imageNamed:@"sceneTitle"];
     titleLayer = [CALayer layer];
@@ -36,7 +36,7 @@
     titleLayer.position = CGPointMake(0.0, 0.0);
     titleLayer.anchorPoint = CGPointMake(0.5, 0.5);
     titleLayer.bounds = CGRectMake(0, 0, 601, 198);
-    titleLayer.frame = CGRectMake(362, 200, 601, 198);
+    titleLayer.frame = CGRectMake(312, 200, 601, 198);
     [self.view.layer addSublayer:titleLayer];
     
     UIImage *imageRoom = [UIImage imageNamed:@"sceneRoom"];
