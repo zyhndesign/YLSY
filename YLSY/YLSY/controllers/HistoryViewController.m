@@ -7,6 +7,8 @@
 //
 
 #import "HistoryViewController.h"
+#import "../UIView/HistoryScrollView.h"
+#import "../UILayer/SlidingBlockLayer.h"
 
 @interface HistoryViewController ()
 
@@ -31,6 +33,41 @@
     UIImage *backgroundImage = [UIImage imageNamed:@"historyBackground"];
     self.view.layer.contents = (__bridge id)[backgroundImage CGImage];
     
+    historyScrollView = [[HistoryScrollView alloc] initWithFrame:CGRectMake(0, 50, 1024, 668)];
+    historyScrollView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:historyScrollView];
+    
+    maskLayer = [CALayer layer];
+    maskLayer.position = CGPointMake(0.0, 0.0);
+    maskLayer.anchorPoint = CGPointMake(0.5, 0.5);
+    maskLayer.frame = CGRectMake(0, 157, 1024, 290);
+    maskLayer.backgroundColor = [[UIColor whiteColor] CGColor];
+    maskLayer.opacity = 0.9;
+    [self.view.layer addSublayer:maskLayer];
+    
+    leftArrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow"]];
+    leftArrowView.frame = CGRectMake(80, 260, 45, 44);
+    [self.view addSubview:leftArrowView];
+    
+    rightArrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightArrow"]];
+    rightArrowView.frame = CGRectMake(900, 260, 45, 44);
+    [self.view addSubview:rightArrowView];
+    
+    contentLogoLayer = [CALayer layer];
+    UIImage *image = [UIImage imageNamed:@"historyContentLogo"];
+    contentLogoLayer.contents = (__bridge id)[image CGImage];
+    contentLogoLayer.position = CGPointMake(0.0, 0.0);
+    contentLogoLayer.anchorPoint = CGPointMake(0.5, 0.5);
+    contentLogoLayer.frame = CGRectMake(300, 247, 385, 66);
+    [self.view.layer addSublayer:contentLogoLayer];
+    
+    sliderBlockLayer = [SlidingBlockLayer layer];
+    sliderBlockLayer.position = CGPointMake(0.0, 0.0);
+    sliderBlockLayer.anchorPoint = CGPointMake(0.5, 0.5);
+    sliderBlockLayer.frame = CGRectMake(300, 462, 60, 248);
+    [self.view.layer addSublayer:sliderBlockLayer];
+    [sliderBlockLayer setNeedsDisplay];
+
 }
 
 - (void)didReceiveMemoryWarning

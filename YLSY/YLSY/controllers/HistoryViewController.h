@@ -8,8 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class HistoryScrollView;
+@class SlidingBlockLayer;
+
 @interface HistoryViewController : UIViewController
-{
+{    
+    UIImageView *leftArrowView;
+    UIImageView *rightArrowView;
     
+    HistoryScrollView *historyScrollView;
+    
+    CALayer *contentLogoLayer;
+    
+    CALayer *maskLayer;
+    
+    SlidingBlockLayer *sliderBlockLayer;
 }
 @end
