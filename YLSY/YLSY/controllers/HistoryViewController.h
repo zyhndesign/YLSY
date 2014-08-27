@@ -10,6 +10,7 @@
 
 @class HistoryScrollView;
 @class SlidingBlockLayer;
+@class HistoryThumbView;
 
 @interface HistoryViewController : UIViewController
 {    
@@ -23,5 +24,61 @@
     CALayer *maskLayer;
     
     SlidingBlockLayer *sliderBlockLayer;
+    
+    UITapGestureRecognizer *leftArrowTap;
+    UITapGestureRecognizer *rightArrowTap;
+    
+    HistoryThumbView *historyThumbView;
+    
+    NSMutableArray *dataArray;
+    
+    //用于计数内容当前访问位置
+    int countNum;
+    
+    
 }
+
+/**
+ *  <#Description#>
+ *
+ *  @param gesture <#gesture description#>
+ */
+-(void)leftArrowImageClick:(UIGestureRecognizer *)gesture;
+
+/**
+ *  <#Description#>
+ *
+ *  @param gesture <#gesture description#>
+ */
+-(void)rightArrowImageClick:(UIGestureRecognizer *)gesture;
+
+/**
+ *  <#Description#>
+ */
+-(void) contentPanelRightMoveInAnimation;
+
+/**
+ *  <#Description#>
+ */
+-(void) contentPanelRightMoveOutAnimation;
+
+/**
+ *  <#Description#>
+ */
+-(void) contentPanelLeftMoveInAnimation;
+
+/**
+ *  <#Description#>
+ */
+-(void) contentPanelLeftMoveOutAnimation;
+
+/**
+ *  <#Description#>
+ */
+-(void) logoImageMoveInAnimation;
+
+/**
+ *  <#Description#>
+ */
+-(void) logoImageMoveOutAnimation;
 @end

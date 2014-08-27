@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class ArticleModel;
+
 @interface HistoryThumbView : UIView
+{
+    ArticleModel *articleModel;
+}
+
+@property (nonatomic) ArticleModel *articleModel;
 
 @end

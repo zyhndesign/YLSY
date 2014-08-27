@@ -45,7 +45,7 @@
     
     UIFont *font = [UIFont fontWithName:@"Courier" size:30];
     UIColor *textColor = [UIColor colorWithRed:254 green:0 blue:0 alpha:1];
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:font, NSFontAttributeName,paragraphStyle, NSParagraphStyleAttributeName,textColor, NSForegroundColorAttributeName, nil];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:font, NSFontAttributeName,paragraphStyle, NSParagraphStyleAttributeName,textColor,NSForegroundColorAttributeName, nil];
     [@"[朱熹]" drawInRect:CGRectMake(0,height + 25,width,40) withAttributes:dict];
     
 }

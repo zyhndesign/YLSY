@@ -9,6 +9,8 @@
 #import "HistoryViewController.h"
 #import "../UIView/HistoryScrollView.h"
 #import "../UILayer/SlidingBlockLayer.h"
+#import "../UIView/HistoryThumbView.h"
+#import "../model/ArticleModel.h"
 
 @interface HistoryViewController ()
 
@@ -30,6 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
     UIImage *backgroundImage = [UIImage imageNamed:@"historyBackground"];
     self.view.layer.contents = (__bridge id)[backgroundImage CGImage];
     
@@ -47,11 +50,20 @@
     
     leftArrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow"]];
     leftArrowView.frame = CGRectMake(80, 260, 45, 44);
+    leftArrowView.userInteractionEnabled = YES;
+    leftArrowView.hidden = YES;
     [self.view addSubview:leftArrowView];
+    
+    leftArrowTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(leftArrowImageClick:)];
+    [leftArrowView addGestureRecognizer:leftArrowTap];
     
     rightArrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightArrow"]];
     rightArrowView.frame = CGRectMake(900, 260, 45, 44);
+    rightArrowView.userInteractionEnabled = YES;
     [self.view addSubview:rightArrowView];
+    
+    rightArrowTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightArrowImageClick:)];
+    [rightArrowView addGestureRecognizer:rightArrowTap];
     
     contentLogoLayer = [CALayer layer];
     UIImage *image = [UIImage imageNamed:@"historyContentLogo"];
@@ -64,10 +76,288 @@
     sliderBlockLayer = [SlidingBlockLayer layer];
     sliderBlockLayer.position = CGPointMake(0.0, 0.0);
     sliderBlockLayer.anchorPoint = CGPointMake(0.5, 0.5);
-    sliderBlockLayer.frame = CGRectMake(300, 462, 60, 248);
+    sliderBlockLayer.frame = CGRectMake(300, 452, 60, 258);
     [self.view.layer addSublayer:sliderBlockLayer];
     [sliderBlockLayer setNeedsDisplay];
+    
+    historyThumbView = [[HistoryThumbView alloc] initWithFrame:CGRectMake(1010, 210, 600, 200)];
+    historyThumbView.backgroundColor = [UIColor clearColor];
+    historyThumbView.hidden = TRUE;
+    [self.view addSubview:historyThumbView];
+    
+    [self initTestData];
+        
+}
 
+-(void)leftArrowImageClick:(UIGestureRecognizer *)gesture
+{
+    if ([dataArray count] > 0)
+    {
+        --countNum;
+        
+        ArticleModel *articleModel = (ArticleModel *)[dataArray objectAtIndex:countNum];
+        
+        historyThumbView.articleModel = articleModel;
+        
+        if (countNum == 0)
+        {
+            [leftArrowView setHidden:YES];
+        }
+        
+        if ([rightArrowView isHidden])
+        {
+            [rightArrowView setHidden:NO];
+        }
+        [self contentPanelRightMoveOutAnimation];
+    }
+    
+}
+
+
+-(void)rightArrowImageClick:(UIGestureRecognizer *)gesture
+{
+    if ([dataArray count] > 0 && countNum < [dataArray count])
+    {
+        ArticleModel *articleModel = (ArticleModel *)[dataArray objectAtIndex:countNum];
+        
+        historyThumbView.articleModel = articleModel;
+        
+        ++countNum;
+        
+        if (countNum == [dataArray count])
+        {
+            [rightArrowView setHidden:YES];
+        }
+        
+        if (countNum == 1)
+        {
+            [self logoImageMoveOutAnimation];
+        }
+        
+        if ([leftArrowView isHidden])
+        {
+            [leftArrowView setHidden:NO];
+        }
+        [self contentPanelLeftMoveOutAnimation];
+    }
+    
+}
+
+-(void) contentPanelRightMoveInAnimation
+{
+    historyThumbView.hidden = NO;
+    [historyThumbView setNeedsDisplay];
+    [CATransaction begin];
+    CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fadeIn setDuration:0.8];
+    [fadeIn setFromValue:[NSNumber numberWithFloat:0.0]];
+    [fadeIn setToValue:[NSNumber numberWithFloat:1.0]];
+    [historyThumbView.layer setOpacity:1.0];
+    
+    CABasicAnimation *moveIn = [CABasicAnimation animationWithKeyPath:@"position"];
+    [moveIn setDuration:1.0];
+    [moveIn setFromValue:[NSValue valueWithCGPoint:CGPointMake(historyThumbView.center.x,historyThumbView.center.y)]];
+    [moveIn setToValue:[NSValue valueWithCGPoint:CGPointMake(historyThumbView.center.x - 810,historyThumbView.center.y)]];
+    historyThumbView.center  = CGPointMake(historyThumbView.center.x - 810, historyThumbView.center.y);
+    
+    [CATransaction setCompletionBlock:^{
+        
+    }];
+    
+    [historyThumbView.layer addAnimation:fadeIn forKey:nil];
+    [historyThumbView.layer addAnimation:moveIn forKey:nil];
+    [CATransaction commit];
+}
+
+-(void) contentPanelRightMoveOutAnimation
+{
+    [CATransaction begin];
+    CABasicAnimation *fadeOut = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fadeOut setDuration:0.8];
+    [fadeOut setFromValue:[NSNumber numberWithFloat:1.0]];
+    [fadeOut setToValue:[NSNumber numberWithFloat:0.0]];
+    [historyThumbView.layer setOpacity:0.0];
+    
+    CABasicAnimation *moveOut = [CABasicAnimation animationWithKeyPath:@"position"];
+    [moveOut setDuration:1.0];
+    [moveOut setFromValue:[NSValue valueWithCGPoint:CGPointMake(historyThumbView.center.x,historyThumbView.center.y)]];
+    [moveOut setToValue:[NSValue valueWithCGPoint:CGPointMake(historyThumbView.center.x + 810,historyThumbView.center.y)]];
+    historyThumbView.center  = CGPointMake(historyThumbView.center.x + 810, historyThumbView.center.y);
+    
+    [CATransaction setCompletionBlock:^{
+        historyThumbView.hidden = YES;
+        
+        if (countNum == 0)
+        {
+            [self logoImageMoveInAnimation];
+        }
+        else
+        {
+            historyThumbView.center  = CGPointMake(historyThumbView.center.x - 1620, historyThumbView.center.y);
+            [self contentPanelLeftMoveInAnimation];
+        }
+    }];
+    
+    [historyThumbView.layer addAnimation:fadeOut forKey:nil];
+    [historyThumbView.layer addAnimation:moveOut forKey:nil];
+    [CATransaction commit];
+}
+
+-(void) contentPanelLeftMoveInAnimation
+{
+    [historyThumbView setNeedsDisplay];
+    historyThumbView.hidden = NO;
+    [CATransaction begin];
+    CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fadeIn setDuration:0.8];
+    [fadeIn setFromValue:[NSNumber numberWithFloat:0.0]];
+    [fadeIn setToValue:[NSNumber numberWithFloat:1.0]];
+    [historyThumbView.layer setOpacity:1.0];
+    
+    CABasicAnimation *moveIn = [CABasicAnimation animationWithKeyPath:@"position"];
+    [moveIn setDuration:1.0];
+    [moveIn setFromValue:[NSValue valueWithCGPoint:CGPointMake(historyThumbView.center.x,historyThumbView.center.y)]];
+    [moveIn setToValue:[NSValue valueWithCGPoint:CGPointMake(historyThumbView.center.x + 810,historyThumbView.center.y)]];
+    historyThumbView.center  = CGPointMake(historyThumbView.center.x + 810, historyThumbView.center.y);
+    
+    [CATransaction setCompletionBlock:^{
+       
+    }];
+    
+    [historyThumbView.layer addAnimation:fadeIn forKey:nil];
+    [historyThumbView.layer addAnimation:moveIn forKey:nil];
+    [CATransaction commit];
+}
+
+-(void) contentPanelLeftMoveOutAnimation
+{
+    [CATransaction begin];
+    CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fadeIn setDuration:0.6];
+    [fadeIn setFromValue:[NSNumber numberWithFloat:1.0]];
+    [fadeIn setToValue:[NSNumber numberWithFloat:0.0]];
+    [historyThumbView.layer setOpacity:0.0];
+    
+    CABasicAnimation *moveIn = [CABasicAnimation animationWithKeyPath:@"position"];
+    [moveIn setDuration:1.0];
+    [moveIn setFromValue:[NSValue valueWithCGPoint:CGPointMake(historyThumbView.center.x,historyThumbView.center.y)]];
+    [moveIn setToValue:[NSValue valueWithCGPoint:CGPointMake(historyThumbView.center.x - 810,historyThumbView.center.y)]];
+    historyThumbView.center  = CGPointMake(historyThumbView.center.x - 810, historyThumbView.center.y);
+    
+    [CATransaction setCompletionBlock:^{
+        if (countNum <= [dataArray count])
+        {
+            historyThumbView.hidden = YES;
+            historyThumbView.center  = CGPointMake(historyThumbView.center.x + 1620, historyThumbView.center.y);
+            [self contentPanelRightMoveInAnimation];
+        }
+        else
+        {
+            [rightArrowView setHidden:YES];
+        }
+    }];
+    
+    [historyThumbView.layer addAnimation:fadeIn forKey:nil];
+    [historyThumbView.layer addAnimation:moveIn forKey:nil];
+    [CATransaction commit];
+}
+
+-(void) logoImageMoveInAnimation
+{
+    contentLogoLayer.hidden = NO;
+    [CATransaction begin];
+    CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fadeIn setDuration:1.0];
+    [fadeIn setFromValue:[NSNumber numberWithFloat:0.0]];
+    [fadeIn setToValue:[NSNumber numberWithFloat:1.0]];
+    [contentLogoLayer setOpacity:1.0];
+    
+    CABasicAnimation *moveIn = [CABasicAnimation animationWithKeyPath:@"position"];
+    [moveIn setDuration:1.0];
+    [moveIn setFromValue:[NSValue valueWithCGPoint:contentLogoLayer.position]];
+    [moveIn setToValue:[NSValue valueWithCGPoint:CGPointMake(contentLogoLayer.position.x + 200, contentLogoLayer.position.y)]];
+    [contentLogoLayer setPosition:CGPointMake(contentLogoLayer.position.x + 200, contentLogoLayer.position.y)];
+    
+    [CATransaction setCompletionBlock:^{
+        contentLogoLayer.hidden = NO;
+    }];
+    
+    [contentLogoLayer addAnimation:fadeIn forKey:nil];
+    [contentLogoLayer addAnimation:moveIn forKey:nil];
+    [CATransaction commit];
+}
+
+-(void) logoImageMoveOutAnimation
+{
+    [CATransaction begin];
+    CABasicAnimation *fadeOut = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [fadeOut setDuration:1.0];
+    [fadeOut setFromValue:[NSNumber numberWithFloat:1.0]];
+    [fadeOut setToValue:[NSNumber numberWithFloat:0.0]];
+    [contentLogoLayer setOpacity:0.0];
+    
+    CABasicAnimation *moveOut = [CABasicAnimation animationWithKeyPath:@"position"];
+    [moveOut setDuration:1.0];
+    [moveOut setFromValue:[NSValue valueWithCGPoint:contentLogoLayer.position]];
+    [moveOut setToValue:[NSValue valueWithCGPoint:CGPointMake(contentLogoLayer.position.x - 200, contentLogoLayer.position.y)]];
+    [contentLogoLayer setPosition:CGPointMake(contentLogoLayer.position.x - 200, contentLogoLayer.position.y)];
+    
+    [CATransaction setCompletionBlock:^{
+        contentLogoLayer.hidden = YES;
+        historyThumbView.hidden = NO;
+        [self contentPanelRightMoveInAnimation];
+    }];
+    
+    [contentLogoLayer addAnimation:fadeOut forKey:nil];
+    [contentLogoLayer addAnimation:moveOut forKey:nil];
+    [CATransaction commit];
+}
+
+-(void) initTestData
+{
+    countNum = 0;
+    
+    dataArray = [[NSMutableArray alloc] init];
+    ArticleModel *articleModel = [ArticleModel new];
+    articleModel.imagePath = @"historyContentPic";
+    articleModel.titleText = @"[元朝书院]";
+    articleModel.timeText = @"公元216年";
+    articleModel.contentText = @"216年始建于长沙城河西";
+    [dataArray addObject:articleModel];
+    
+    articleModel = [ArticleModel new];
+    articleModel.imagePath = @"historyContentPic";
+    articleModel.titleText = @"[岳麓山]";
+    articleModel.timeText = @"公元1216年";
+    articleModel.contentText = @"216年始建于长沙城河西";
+    [dataArray addObject:articleModel];
+    
+    articleModel = [ArticleModel new];
+    articleModel.imagePath = @"historyContentPic";
+    articleModel.titleText = @"[湖南大学]";
+    articleModel.timeText = @"公元1902年";
+    articleModel.contentText = @"216年始建于长沙城河西岳麓山大学城";
+    [dataArray addObject:articleModel];
+    
+    articleModel = [ArticleModel new];
+    articleModel.imagePath = @"historyContentPic";
+    articleModel.titleText = @"[湖南师范大学]";
+    articleModel.timeText = @"公元1922年";
+    articleModel.contentText = @"216年始建于长沙城河西岳麓山大学城";
+    [dataArray addObject:articleModel];
+    
+    articleModel = [ArticleModel new];
+    articleModel.imagePath = @"historyContentPic";
+    articleModel.titleText = @"[中南大学]";
+    articleModel.timeText = @"公元1932年";
+    articleModel.contentText = @"216年始建于长沙城河西岳麓山大学城";
+    [dataArray addObject:articleModel];
+    
+    if ([dataArray count] == 0)
+    {
+        [leftArrowView setHidden:TRUE];
+        [rightArrowView setHidden:TRUE];
+    }
 }
 
 - (void)didReceiveMemoryWarning

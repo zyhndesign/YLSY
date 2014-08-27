@@ -7,8 +7,11 @@
 //
 
 #import "HistoryThumbView.h"
+#import "../model/ArticleModel.h"
 
 @implementation HistoryThumbView
+
+@synthesize articleModel;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -21,7 +24,7 @@
 
 -(void) drawRect:(CGRect)rect
 {
-    UIImage *image = [UIImage imageNamed:@"pic1"];
+    UIImage *image = [UIImage imageNamed:articleModel.imagePath];
     CGImageRef imageCG = [image CGImage];
     [image drawAtPoint:CGPointZero];
     
@@ -31,13 +34,18 @@
     UIFont *font = [UIFont fontWithName:@"Courier" size:30];
     UIColor *textColor = [UIColor colorWithRed:254 green:0 blue:0 alpha:1];
     NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:font, NSFontAttributeName,paragraphStyle, NSParagraphStyleAttributeName,textColor, NSForegroundColorAttributeName, nil];
-    [@"公元1275年" drawInRect:CGRectMake(CGImageGetWidth(imageCG) + 10, 0, CGImageGetWidth(imageCG),40) withAttributes:dict];
-    [@"元朝书院屡毁屡建" drawInRect:CGRectMake(CGImageGetWidth(imageCG) + 10, 50, CGImageGetWidth(imageCG),40) withAttributes:dict];
+    [articleModel.timeText drawInRect:CGRectMake(CGImageGetWidth(imageCG) + 10, 0, 360,40) withAttributes:dict];
     
-    UIFont *contentFont = [UIFont fontWithName:@"Courier" size:16];
-    UIColor *contentTextColor = [UIColor colorWithRed:2 green:0 blue:0 alpha:1];
-    NSDictionary *contentDict = [[NSDictionary alloc] initWithObjectsAndKeys:contentFont, NSFontAttributeName,paragraphStyle, NSParagraphStyleAttributeName,contentTextColor, NSForegroundColorAttributeName, nil];
-    [@"1275年元兵攻破长沙，岳麓书院被付之一炬" drawInRect:CGRectMake(CGImageGetWidth(imageCG) + 10, 0, CGImageGetWidth(imageCG),90) withAttributes:contentDict];
+    font = [UIFont fontWithName:@"Courier" size:35];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:font, NSFontAttributeName,paragraphStyle, NSParagraphStyleAttributeName,textColor, NSForegroundColorAttributeName, nil];
+    [articleModel.titleText drawInRect:CGRectMake(CGImageGetWidth(imageCG) + 10, 50, 360,40) withAttributes:dict];
+    
+    font = [UIFont fontWithName:@"Courier" size:23];
+    paragraphStyle.lineBreakMode = kCTLineBreakByWordWrapping;
+    paragraphStyle.lineSpacing = 2.0;
+    textColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
+    dict = [[NSDictionary alloc] initWithObjectsAndKeys:font, NSFontAttributeName,paragraphStyle, NSParagraphStyleAttributeName,textColor, NSForegroundColorAttributeName, nil];
+    [articleModel.contentText drawInRect:CGRectMake(CGImageGetWidth(imageCG) + 10, 110, 360,30) withAttributes:dict];
 }
 /*
 // Only override drawRect: if you perform custom drawing.
