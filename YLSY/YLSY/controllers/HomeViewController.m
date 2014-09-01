@@ -10,12 +10,16 @@
 #import "../libs/pop/POPDecayAnimation.h"
 #import "../tools/POPAnimationManager.h"
 #import "../libs/pop/POPBasicAnimation.h"
+#import "../UIView/ArticleDirectionBlockView.h"
+#import "../model/ArticleMapDirectionViewModel.h"
 
 @interface HomeViewController ()
 
 @end
 
 @implementation HomeViewController
+
+@synthesize isAddDirectionView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -122,6 +126,11 @@
     articleMapLayer.bounds = CGRectMake(0, 0, 1024, 768);
     articleMapLayer.frame = CGRectMake(0, 768, 1024, 768);
     [self.view.layer addSublayer:articleMapLayer];
+    
+    isAddDirectionView = NO;
+    isAnimation = NO;
+    isHidden = NO;
+    [self initMapArticleDirectionView];
 }
 
 -(void)performAnimation:(CALayer *)layer
@@ -173,6 +182,235 @@
     
     [mapLayer pop_addAnimation:anim forKey:@"Animation"];
     [maskLayer pop_addAnimation:anim forKey:@"Animation"];
+}
+
+-(void) addArticleDirectionView
+{
+    if (!isAddDirectionView)
+    {
+        isAddDirectionView = YES;
+        ArticleMapDirectionViewModel *dModelView = nil;
+        directionViewArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < [directionViewModelArray count]; i++)
+        {
+            dModelView = [directionViewModelArray objectAtIndex:i];
+            articleDirectionBlockView = [[ArticleDirectionBlockView alloc] initWithFrame:CGRectMake(dModelView.xValue, dModelView.yValue, 60, 60 + dModelView.hightLenght)];
+            articleDirectionBlockView.articleNumber = i + 1;
+            articleDirectionBlockView.lineHeight = dModelView.hightLenght;
+            [articleDirectionBlockView setNeedsDisplay];
+            articleDirectionBlockView.backgroundColor = [UIColor clearColor];
+            [self.view addSubview:articleDirectionBlockView];
+            [directionViewArray addObject:articleDirectionBlockView];
+        }
+    }
+}
+
+-(void) addAnimForDirectionView
+{
+    if (!isAnimation)
+    {
+        isAnimation = YES;
+        isHidden = NO;
+        POPBasicAnimation *anim = nil;
+        for (ArticleDirectionBlockView *articleView in directionViewArray)
+        {
+            if ([articleView isHidden])
+            {
+                [articleView setHidden:FALSE];
+            }
+            [articleView.layer pop_removeAllAnimations];
+            anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
+            anim.fromValue = [NSValue valueWithCGPoint:CGPointMake(articleView.center.x, articleView.center.y)];
+            anim.toValue = [NSValue valueWithCGPoint:CGPointMake(articleView.center.x, articleView.center.y + 30)];
+            [articleView.layer pop_addAnimation:anim forKey:@"Animation"];
+        }
+    }
+    
+}
+
+-(void) hideAllArticleDirectionView
+{
+    if (!isHidden)
+    {
+        isAnimation = NO;
+        isHidden = YES;
+        for (ArticleDirectionBlockView *articleView in directionViewArray)
+        {
+            articleView.hidden = YES;
+            articleView.frame = CGRectMake(articleView.frame.origin.x, articleView.frame.origin.y - 30, articleView.frame.size.width, articleView.frame.size.height);
+        }
+    }
+}
+
+-(void) initMapArticleDirectionView
+{
+    directionViewModelArray = [[NSMutableArray alloc] init];
+    
+    ArticleMapDirectionViewModel *dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 280;
+    dModelView.yValue = 1220;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 330;
+    dModelView.yValue = 1170;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 438;
+    dModelView.yValue = 1075;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 410;
+    dModelView.yValue = 976;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 510;
+    dModelView.yValue = 1016;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 650;
+    dModelView.yValue = 1056;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 580;
+    dModelView.yValue = 1186;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 680;
+    dModelView.yValue = 1306;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 680;
+    dModelView.yValue = 1136;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 718;
+    dModelView.yValue = 1070;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    //==========================================================
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 823;
+    dModelView.yValue = 1096;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 853;
+    dModelView.yValue = 976;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 630;
+    dModelView.yValue = 926;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 570;
+    dModelView.yValue = 878.0;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 730;
+    dModelView.yValue = 968.0;
+    dModelView.hightLenght = 15.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 755;
+    dModelView.yValue = 946.0;
+    dModelView.hightLenght = 5.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 795;
+    dModelView.yValue = 952.0;
+    dModelView.hightLenght = 15.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 675;
+    dModelView.yValue = 818.0;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 765;
+    dModelView.yValue = 861.0;
+    dModelView.hightLenght = 20.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 800;
+    dModelView.yValue = 878.0;
+    dModelView.hightLenght = 10.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    //==========================================================
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 840;
+    dModelView.yValue = 893.0;
+    dModelView.hightLenght = 10.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 845;
+    dModelView.yValue = 823.0;
+    dModelView.hightLenght = 10.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 885;
+    dModelView.yValue = 830.0;
+    dModelView.hightLenght = 20.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 775;
+    dModelView.yValue = 765.0;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 590;
+    dModelView.yValue = 760.0;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 345;
+    dModelView.yValue = 800.0;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
+    
+    dModelView = [[ArticleMapDirectionViewModel alloc] init];
+    dModelView.xValue = 115;
+    dModelView.yValue = 1120.0;
+    dModelView.hightLenght = 30.0;
+    [directionViewModelArray addObject:dModelView];
 }
 
 - (void)didReceiveMemoryWarning

@@ -24,6 +24,8 @@
 		D50C826519AC762200A6C04C /* SlidingBlockLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D50C826419AC762200A6C04C /* SlidingBlockLayer.m */; };
 		D5113A3619AD958E004057BA /* ArticleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5113A3519AD958E004057BA /* ArticleModel.m */; };
 		D535A3E819AB2F53006198CE /* HumanityThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = D535A3E719AB2F53006198CE /* HumanityThumbView.m */; };
+		D58559DC19B004A600BA1883 /* ArticleDirectionBlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = D58559DB19B004A600BA1883 /* ArticleDirectionBlockView.m */; };
+		D58559DF19B01C4B00BA1883 /* ArticleMapDirectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D58559DE19B01C4B00BA1883 /* ArticleMapDirectionViewModel.m */; };
 		D5B8A33119A5DCEE0088DE32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B8A33019A5DCEE0088DE32 /* Foundation.framework */; };
 		D5B8A33319A5DCEE0088DE32 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B8A33219A5DCEE0088DE32 /* CoreGraphics.framework */; };
 		D5B8A33519A5DCEE0088DE32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B8A33419A5DCEE0088DE32 /* UIKit.framework */; };
@@ -107,6 +109,10 @@
 		D5113A3519AD958E004057BA /* ArticleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleModel.m; sourceTree = "<group>"; };
 		D535A3E619AB2F53006198CE /* HumanityThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanityThumbView.h; sourceTree = "<group>"; };
 		D535A3E719AB2F53006198CE /* HumanityThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HumanityThumbView.m; sourceTree = "<group>"; };
+		D58559DA19B004A600BA1883 /* ArticleDirectionBlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDirectionBlockView.h; sourceTree = "<group>"; };
+		D58559DB19B004A600BA1883 /* ArticleDirectionBlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDirectionBlockView.m; sourceTree = "<group>"; };
+		D58559DD19B01C4B00BA1883 /* ArticleMapDirectionViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMapDirectionViewModel.h; sourceTree = "<group>"; };
+		D58559DE19B01C4B00BA1883 /* ArticleMapDirectionViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMapDirectionViewModel.m; sourceTree = "<group>"; };
 		D5B8A32D19A5DCEE0088DE32 /* YLSY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLSY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B8A33019A5DCEE0088DE32 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D5B8A33219A5DCEE0088DE32 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -221,6 +227,8 @@
 				D50C825E19AC260B00A6C04C /* HistoryThumbView.m */,
 				D50C826019AC2BA800A6C04C /* HistoryScrollView.h */,
 				D50C826119AC2BA800A6C04C /* HistoryScrollView.m */,
+				D58559DA19B004A600BA1883 /* ArticleDirectionBlockView.h */,
+				D58559DB19B004A600BA1883 /* ArticleDirectionBlockView.m */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -239,6 +247,8 @@
 			children = (
 				D5113A3419AD958E004057BA /* ArticleModel.h */,
 				D5113A3519AD958E004057BA /* ArticleModel.m */,
+				D58559DD19B01C4B00BA1883 /* ArticleMapDirectionViewModel.h */,
+				D58559DE19B01C4B00BA1883 /* ArticleMapDirectionViewModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -554,6 +564,7 @@
 				D50C826519AC762200A6C04C /* SlidingBlockLayer.m in Sources */,
 				D50C825F19AC260B00A6C04C /* HistoryThumbView.m in Sources */,
 				D504D17E19AACACA00464770 /* StoryViewController.m in Sources */,
+				D58559DF19B01C4B00BA1883 /* ArticleMapDirectionViewModel.m in Sources */,
 				D504D18119AACADA00464770 /* StoryTopViewController.m in Sources */,
 				D5B8A3B619A5E32C0088DE32 /* POPSpringAnimation.mm in Sources */,
 				D5B8A3B019A5E32C0088DE32 /* POPCustomAnimation.mm in Sources */,
@@ -569,6 +580,7 @@
 				D5B8A3A919A5E32C0088DE32 /* POPAnimationEvent.mm in Sources */,
 				D504D16F19AACA2F00464770 /* HistoryViewController.m in Sources */,
 				D5B8A3AB19A5E32C0088DE32 /* POPAnimationRuntime.mm in Sources */,
+				D58559DC19B004A600BA1883 /* ArticleDirectionBlockView.m in Sources */,
 				D5B8A3B219A5E32C0088DE32 /* POPGeometry.mm in Sources */,
 				D504D16519AABEB500464770 /* RecommandViewController.m in Sources */,
 				D5B8A3B419A5E32C0088DE32 /* POPMath.mm in Sources */,

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class ArticleDirectionBlockView;
+
 @interface HomeViewController : UIViewController
 {
     CALayer *mapLayer;
@@ -25,8 +27,25 @@
     BOOL cloud4SwingAnimated;
     
     CALayer *articleMapLayer;
+    
+    ArticleDirectionBlockView *articleDirectionBlockView;
+    
+    NSMutableArray *directionViewModelArray;
+    NSMutableArray *directionViewArray;
+    BOOL isAddDirectionView;
+    BOOL isAnimation;
+    BOOL isHidden;
 }
+
+@property (nonatomic) BOOL isAddDirectionView;
 
 -(void) executeScrollMap:(float)position;
 
+-(void) addArticleDirectionView;
+
+-(void) initMapArticleDirectionView;
+
+-(void) hideAllArticleDirectionView;
+
+-(void) addAnimForDirectionView;
 @end

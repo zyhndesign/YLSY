@@ -137,6 +137,18 @@
         //[homeViewController executeScrollMap:diff];
     }
     
+    if (newContentOffsetY >= 568 && newContentOffsetY <= 1236)
+    {
+        [homeViewController addArticleDirectionView];
+        [homeViewController addAnimForDirectionView];
+    }
+    else if (newContentOffsetY >= 1536 || newContentOffsetY <= 100)
+    {
+        if (homeViewController.isAddDirectionView)
+        {
+            [homeViewController hideAllArticleDirectionView];
+        }
+    }
 }
 
 
