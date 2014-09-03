@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StoryViewController : UIViewController
+@class StoryContentView;
 
+@interface StoryViewController : UIViewController
+{
+    UIImageView *leftArrowView;
+    UIImageView *rightArrowView;
+    
+    StoryContentView *contentView1;
+    StoryContentView *contentView2;
+    
+    BOOL contentView1ISBack;
+    BOOL contentView2ISBack;
+    
+    BOOL leftSign;
+    BOOL rightSign;
+}
 @end

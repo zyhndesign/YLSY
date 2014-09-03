@@ -21,5 +21,6 @@
     
     UITapGestureRecognizer *leftArrowTap;
     UITapGestureRecognizer *rightArrowTap;
+   
 }
 @end

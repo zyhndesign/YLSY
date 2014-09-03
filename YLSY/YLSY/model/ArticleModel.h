@@ -10,14 +10,17 @@
 
 @interface ArticleModel : NSObject
 {
+    int articleId;
     NSString *imagePath;
     NSString *timeText;
     NSString *titleText;
     NSString *contentText;
 }
 
+@property (nonatomic) int articleId;
 @property (nonatomic) NSString *imagePath;
 @property (nonatomic) NSString *timeText;
 @property (nonatomic) NSString *titleText;
 @property (nonatomic) NSString *contentText;
+
 @end

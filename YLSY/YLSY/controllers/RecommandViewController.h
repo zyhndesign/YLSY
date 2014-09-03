@@ -20,5 +20,8 @@
     ArticleThumbView *oneThumbView;
     ArticleThumbView *twoThumbView;
     ArticleThumbView *threeThumbView;
+    
+    UITapGestureRecognizer *leftArrowTap;
+    UITapGestureRecognizer *rightArrowTap;
 }
 @end

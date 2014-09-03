@@ -10,7 +10,7 @@
 
 @implementation ArticleModel
 
-@synthesize imagePath, timeText, titleText, contentText;
+@synthesize articleId, imagePath, timeText, titleText, contentText;
 
 
 
