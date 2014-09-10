@@ -10,6 +10,7 @@
 #import "../libs/pop/POPDecayAnimation.h"
 #import "../tools/POPAnimationManager.h"
 #import "../libs/pop/POPBasicAnimation.h"
+#import "../libs/pop/POPSpringAnimation.h"
 #import "../UIView/ArticleDirectionBlockView.h"
 #import "../model/ArticleMapDirectionViewModel.h"
 
@@ -26,7 +27,7 @@ static const int articleArraySign[27][3] = {
     {650,288,30},{580,418,30},{680,538,30},{680,368,30},{718,302,30},
     {823,328,30},{853,208,30},{630,158,30},{570,110,30},{730,200,15},
     {755,178,5},{795,184,15},{675,50,30},{765,93,20},{800,110,10},
-    {840,125,10},{845,55,10},{885,62,20},{775,100,30},{590,100,30},
+    {840,125,10},{845,55,10},{885,62,20},{775,0,30},{590,0,30},
     {345,32,30},{115,352,30}
 };
 
@@ -56,13 +57,21 @@ static const int ARTICLE_NUMBER = 27;
     mapLayer.opacity = 0.6;
     [self.view.layer addSublayer:mapLayer];
     
-    maskLayer = [CALayer layer];
-    maskLayer.backgroundColor = [[UIColor clearColor] CGColor];
-    maskLayer.position = CGPointMake(0.0, 0.0);
-    maskLayer.anchorPoint = CGPointMake(0.5, 0.5);
-    maskLayer.bounds = CGRectMake(0, 0, 1024, 768);
-    maskLayer.frame = CGRectMake(0, 0, 1024, 768);
-    [self.view.layer addSublayer:maskLayer];
+    logoLayer = [CALayer layer];
+    UIImage *logoImage = [UIImage imageNamed:@"yueluAcademicMapSeal"];
+    //logoLayer.backgroundColor = [[UIColor blackColor] CGColor];
+    logoLayer.contents = (__bridge id)[logoImage CGImage];
+    logoLayer.position = CGPointMake(0.0, 0.0);
+    logoLayer.anchorPoint = CGPointMake(0.5, 0.5);
+    logoLayer.bounds = CGRectMake(0, 0, 63, 196);
+    logoLayer.frame = CGRectMake(100, 80, 63, 196);
+    logoLayer.opacity = 0.6;
+    [self.view.layer addSublayer:logoLayer];
+    
+    
+    maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
+    maskView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:maskView];
     
     cloud1Layer = [CALayer layer];
     UIImage *cloud1Image = [UIImage imageNamed:@"cloud1"];
@@ -75,7 +84,7 @@ static const int ARTICLE_NUMBER = 27;
     cloud1Layer.opacity = 0.6;
     cloud1SwingAnimated = NO;
     [self performAnimation:cloud1Layer];
-    [maskLayer addSublayer:cloud1Layer];
+    [maskView.layer addSublayer:cloud1Layer];
     
     cloud2Layer = [CALayer layer];
     UIImage *cloud2Image = [UIImage imageNamed:@"cloud2"];
@@ -88,7 +97,7 @@ static const int ARTICLE_NUMBER = 27;
     cloud2SwingAnimated = NO;
     cloud2Layer.opacity = 0.6;
     [self performAnimation:cloud2Layer];
-    [maskLayer addSublayer:cloud2Layer];
+    [maskView.layer addSublayer:cloud2Layer];
 
     cloud3Layer = [CALayer layer];
     UIImage *cloud3Image = [UIImage imageNamed:@"cloud3"];
@@ -101,7 +110,7 @@ static const int ARTICLE_NUMBER = 27;
     cloud3Layer.opacity = 0.6;
     cloud3SwingAnimated = NO;
     [self performAnimation:cloud3Layer];
-    [maskLayer addSublayer:cloud3Layer];
+    [maskView.layer addSublayer:cloud3Layer];
 
     cloud4Layer = [CALayer layer];
     UIImage *cloud4Image = [UIImage imageNamed:@"cloud4"];
@@ -114,7 +123,7 @@ static const int ARTICLE_NUMBER = 27;
     cloud4Layer.opacity = 0.6;
     cloud4SwingAnimated = NO;
     [self performAnimation:cloud4Layer];
-    [maskLayer addSublayer:cloud4Layer];
+    [maskView.layer addSublayer:cloud4Layer];
 
     logoTextLayer = [CALayer layer];
     UIImage *academicImage = [UIImage imageNamed:@"yueluAcademic"];
@@ -123,26 +132,19 @@ static const int ARTICLE_NUMBER = 27;
     logoTextLayer.anchorPoint = CGPointMake(0.5, 0.5);
     logoTextLayer.bounds = CGRectMake(0, 0, 458, 458);
     logoTextLayer.frame = CGRectMake(283, 155, 458, 458);
-    [maskLayer addSublayer:logoTextLayer];
+    [maskView.layer addSublayer:logoTextLayer];
     
-    arrowLayer = [CALayer layer];
-    UIImage *arrowImage = [UIImage imageNamed:@"downIcon1"];
-    arrowLayer.contents = (__bridge id)[arrowImage CGImage];
-    arrowLayer.position = CGPointMake(0.0, 0.0);
-    arrowLayer.anchorPoint = CGPointMake(0.5, 0.5);
-    arrowLayer.bounds = CGRectMake(0, 0, 45, 45);
-    arrowLayer.frame = CGRectMake(467, 700, 45, 45);
-    [maskLayer addSublayer:arrowLayer];
+    UIImage *arrowImage = [UIImage imageNamed:@"upBtn"];
+    upBtnImg = [[UIImageView alloc] initWithImage:arrowImage];
+    upBtnImg.frame = CGRectMake(467, 700, 53, 29);
+    upBtnImg.userInteractionEnabled = YES;
+    upBtnAnimated = NO;
+    [self upBtnAnimation:upBtnImg.layer];
+    [maskView addSubview:upBtnImg];
     
-    /*
-    articleMapLayer = [CALayer layer];
-    articleMapLayer.contents = (__bridge id)[mapImage CGImage];
-    articleMapLayer.position = CGPointMake(0.0, 0.0);
-    articleMapLayer.anchorPoint = CGPointMake(0.5, 0.5);
-    articleMapLayer.bounds = CGRectMake(0, 0, 1024, 768);
-    articleMapLayer.frame = CGRectMake(0, 768, 1024, 768);
-    [self.view.layer addSublayer:articleMapLayer];
-    */
+    UITapGestureRecognizer *upImgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideTopLayer:)];
+    [upBtnImg addGestureRecognizer:upImgTap];
+   
     isAddDirectionView = NO;
     isAnimation = NO;
     isHidden = NO;
@@ -186,17 +188,58 @@ static const int ARTICLE_NUMBER = 27;
     [layer pop_addAnimation:anim forKey:@"Animation"];
 }
 
--(void) executeScrollMap:(float)position
+-(void)upBtnAnimation:(CALayer *)layer
 {
-    POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
+    [upBtnImg.layer pop_removeAllAnimations];
+    POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
     
-    anim.fromValue = [NSValue valueWithCGPoint:CGPointMake(mapLayer.frame.origin.x + mapLayer.frame.size.width / 2, mapLayer.frame.origin.y + mapLayer.frame.size.height / 2)];
-    anim.toValue = [NSValue valueWithCGPoint:CGPointMake(mapLayer.frame.origin.x + mapLayer.frame.size.width / 2, mapLayer.frame.origin.y + mapLayer.frame.size.height / 2 + position)];
+    if (upBtnAnimated) {
+        anim.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+    }else{
+        anim.toValue = [NSValue valueWithCGPoint:CGPointMake(1.5, 1.5)];
+    }
+    
+    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    anim.duration = 1.0;
+    upBtnAnimated = !upBtnAnimated;
+    
+    anim.completionBlock = ^(POPAnimation *anim, BOOL finished) {
+        if (finished) {
+            
+            [self upBtnAnimation:upBtnImg.layer];
+        }
+    };
 
-    anim.duration = 0.2;
+    [upBtnImg.layer pop_addAnimation:anim forKey:@"Animation"];
+}
+
+-(void) hideTopLayer:(UIGestureRecognizer *) gesture
+{
+    [maskView.layer pop_removeAllAnimations];
+    POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
+    anim.toValue = [NSValue valueWithCGPoint:CGPointMake(self.view.window.center.x, -768.0)];
+    anim.springSpeed = 1.0;
+    [maskView pop_addAnimation:anim forKey:@"AnimationHide"];
     
-    [mapLayer pop_addAnimation:anim forKey:@"Animation"];
-    [maskLayer pop_addAnimation:anim forKey:@"Animation"];
+    [self animationForMapAndLogo];
+    [self addArticleDirectionView];
+    [self addAnimForDirectionView];
+}
+
+-(void) animationForMapAndLogo
+{
+    logoLayer.opacity = 1.0;
+    mapLayer.opacity = 1.0;
+    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    anim.fromValue = [NSNumber numberWithFloat:0.6];
+    anim.toValue = [NSNumber numberWithFloat:1.0];
+    anim.duration = 1.0;
+    anim.removedOnCompletion = NO;
+    anim.autoreverses = NO;
+    anim.repeatCount = 0;
+    [logoLayer addAnimation:anim forKey:@"opacity"];
+    [mapLayer addAnimation:anim forKey:@"opacity"];
+    
 }
 
 -(void) addArticleDirectionView

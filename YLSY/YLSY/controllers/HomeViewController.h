@@ -12,20 +12,22 @@
 
 @interface HomeViewController : UIViewController
 {
+    UIView *maskView;
     CALayer *mapLayer;
-    CALayer *maskLayer;
     CALayer *cloud1Layer;
     CALayer *cloud2Layer;
     CALayer *cloud3Layer;
     CALayer *cloud4Layer;
     CALayer *logoTextLayer;
-    CALayer *arrowLayer;
+    CALayer *logoLayer;
+    
+    UIImageView *upBtnImg;
     
     BOOL cloud1SwingAnimated;
     BOOL cloud2SwingAnimated;
     BOOL cloud3SwingAnimated;
     BOOL cloud4SwingAnimated;
-    
+    BOOL upBtnAnimated;
     //CALayer *articleMapLayer;
     
     ArticleDirectionBlockView *articleDirectionBlockView;
@@ -39,13 +41,13 @@
 
 @property (nonatomic) BOOL isAddDirectionView;
 
--(void) executeScrollMap:(float)position;
+-(void)upBtnAnimation:(CALayer *)layer;
 
 -(void) addArticleDirectionView;
-
--(void) initMapArticleDirectionView;
 
 -(void) hideAllArticleDirectionView;
 
 -(void) addAnimForDirectionView;
+
+-(void) animationForMapAndLogo;
 @end
