@@ -113,7 +113,17 @@
     
     mainScrollView.bounces = NO;
     mainScrollView.delegate = self;
+    mainScrollView.scrollEnabled = NO;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setScrollToEnabled:) name:@"SET_SCRILLVIEW_SCROLL_ENABLE" object:nil];
+}
+
+-(void)setScrollToEnabled:(NSNotification *)aNotification
+{
+    if (mainScrollView != nil)
+    {
+        mainScrollView.scrollEnabled = YES;
+    }
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
@@ -153,6 +163,10 @@
      */
 }
 
+-(void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning
 {

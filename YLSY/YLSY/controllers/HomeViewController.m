@@ -68,7 +68,6 @@ static const int ARTICLE_NUMBER = 27;
     logoLayer.opacity = 0.6;
     [self.view.layer addSublayer:logoLayer];
     
-    
     maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
     maskView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:maskView];
@@ -216,14 +215,16 @@ static const int ARTICLE_NUMBER = 27;
 -(void) hideTopLayer:(UIGestureRecognizer *) gesture
 {
     [maskView.layer pop_removeAllAnimations];
-    POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
-    anim.toValue = [NSValue valueWithCGPoint:CGPointMake(self.view.window.center.x, -768.0)];
-    anim.springSpeed = 1.0;
-    [maskView pop_addAnimation:anim forKey:@"AnimationHide"];
-    
-    [self animationForMapAndLogo];
-    [self addArticleDirectionView];
-    [self addAnimForDirectionView];
+    POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPViewCenter];
+    anim.toValue = [NSValue valueWithCGPoint:CGPointMake(self.view.center.x, -384.0)];
+    anim.duration = 1.5;
+    [anim setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
+        [self animationForMapAndLogo];
+        [self addArticleDirectionView];
+        [self addAnimForDirectionView];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SET_SCRILLVIEW_SCROLL_ENABLE" object:nil userInfo:nil];
+    }];
+    [maskView pop_addAnimation:anim forKey:@"centerAnimation"];
 }
 
 -(void) animationForMapAndLogo
@@ -233,7 +234,7 @@ static const int ARTICLE_NUMBER = 27;
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"opacity"];
     anim.fromValue = [NSNumber numberWithFloat:0.6];
     anim.toValue = [NSNumber numberWithFloat:1.0];
-    anim.duration = 1.0;
+    anim.duration = 2.0;
     anim.removedOnCompletion = NO;
     anim.autoreverses = NO;
     anim.repeatCount = 0;
