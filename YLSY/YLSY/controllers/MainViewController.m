@@ -42,7 +42,7 @@
     // Do any additional setup after loading the view.
         
     homeViewController = [[HomeViewController alloc] init];
-    homeViewController.view.frame = CGRectMake(0, 0, 1024, 1536);
+    homeViewController.view.frame = CGRectMake(0, 0, 1024, 768);
     [mainScrollView addSubview:homeViewController.view];
     [self addChildViewController:homeViewController];
     

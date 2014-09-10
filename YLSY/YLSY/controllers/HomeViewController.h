@@ -26,7 +26,7 @@
     BOOL cloud3SwingAnimated;
     BOOL cloud4SwingAnimated;
     
-    CALayer *articleMapLayer;
+    //CALayer *articleMapLayer;
     
     ArticleDirectionBlockView *articleDirectionBlockView;
     

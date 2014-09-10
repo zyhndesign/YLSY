@@ -8,6 +8,7 @@
 
 #import "HumanityViewController.h"
 #import "../UIView/HumanityThumbView.h"
+#import "../libs/pop/POPDecayAnimation.h"
 
 @interface HumanityViewController ()
 
@@ -31,11 +32,19 @@
     
     leftArrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrow"]];
     leftArrowView.frame = CGRectMake(80, 380, 45, 44);
+    leftArrowView.userInteractionEnabled = YES;
     [self.view addSubview:leftArrowView];
+    
+    UITapGestureRecognizer *leftGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(leftArrowViewClick:)];
+    [leftArrowView addGestureRecognizer:leftGesture];
     
     rightArrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightArrow"]];
     rightArrowView.frame = CGRectMake(900, 380, 45, 44);
+    rightArrowView.userInteractionEnabled = YES;
     [self.view addSubview:rightArrowView];
+    
+    UITapGestureRecognizer *rightGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightArrowViewClick:)];
+    [rightArrowView addGestureRecognizer:rightGesture];
     
     oneThumbView = [[HumanityThumbView alloc] initWithFrame:CGRectMake(200, 230, 201, 300)];
     oneThumbView.backgroundColor = [UIColor clearColor];
@@ -48,6 +57,21 @@
     threeThumbView = [[HumanityThumbView alloc] initWithFrame:CGRectMake(642, 230, 201, 300)];
     threeThumbView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:threeThumbView];
+}
+
+-(void)leftArrowViewClick:(UIGestureRecognizer *)gesture
+{
+    NSLog(@"Left Click....");
+    [oneThumbView pop_removeAllAnimations];
+    POPDecayAnimation *decayAnim = [POPDecayAnimation animationWithPropertyNamed:kPOPLayerRotationY];
+    decayAnim.fromValue = @(0);
+    decayAnim.velocity = @(0.5);
+    [oneThumbView pop_addAnimation:decayAnim forKey:@"Animation"];
+}
+
+-(void)rightArrowViewClick:(UIGestureRecognizer *)gesture
+{
+    NSLog(@"Right Click....");
 }
 
 - (void)didReceiveMemoryWarning

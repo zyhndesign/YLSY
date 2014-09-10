@@ -21,6 +21,12 @@
 
 @synthesize isAddDirectionView;
 
+static const int articleArraySign[27][3] = {
+    {280,452,30},{330,402,30},{438,307,30},{410,208,30},{510,248,30},{650,288,30},{580,418,30},{680,538,30},{680,368,30},{718,302,30},
+    {823,328,30},{853,208,30},{630,158,30},{570,110,30},{730,200,15},{755,178,5},{795,184,15},{675,50,30},{765,93,20},{800,110,10},
+    {840,125,10},{845,55,10},{885,62,20},{775,100,30},{590,100,30},{345,32,30},{115,352,30}
+};
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -119,6 +125,7 @@
     arrowLayer.frame = CGRectMake(467, 700, 45, 45);
     [self.view.layer addSublayer:arrowLayer];
     
+    /*
     articleMapLayer = [CALayer layer];
     articleMapLayer.contents = (__bridge id)[mapImage CGImage];
     articleMapLayer.position = CGPointMake(0.0, 0.0);
@@ -126,7 +133,7 @@
     articleMapLayer.bounds = CGRectMake(0, 0, 1024, 768);
     articleMapLayer.frame = CGRectMake(0, 768, 1024, 768);
     [self.view.layer addSublayer:articleMapLayer];
-    
+    */
     isAddDirectionView = NO;
     isAnimation = NO;
     isHidden = NO;
@@ -173,11 +180,10 @@
 -(void) executeScrollMap:(float)position
 {
     POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    NSLog(@"====1:%f,%f",mapLayer.frame.origin.x + mapLayer.frame.size.width / 2,mapLayer.frame.origin.y + mapLayer.frame.size.height / 2);
     
     anim.fromValue = [NSValue valueWithCGPoint:CGPointMake(mapLayer.frame.origin.x + mapLayer.frame.size.width / 2, mapLayer.frame.origin.y + mapLayer.frame.size.height / 2)];
     anim.toValue = [NSValue valueWithCGPoint:CGPointMake(mapLayer.frame.origin.x + mapLayer.frame.size.width / 2, mapLayer.frame.origin.y + mapLayer.frame.size.height / 2 + position)];
-    NSLog(@"====2:%f,%f",mapLayer.frame.origin.x + mapLayer.frame.size.width / 2, mapLayer.frame.origin.y + mapLayer.frame.size.height / 2 + position);
+
     anim.duration = 0.2;
     
     [mapLayer pop_addAnimation:anim forKey:@"Animation"];
