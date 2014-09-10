@@ -53,7 +53,16 @@ static const int ARTICLE_NUMBER = 27;
     mapLayer.anchorPoint = CGPointMake(0.5, 0.5);
     mapLayer.bounds = CGRectMake(0, 0, 1024, 768);
     mapLayer.frame = CGRectMake(0, 0, 1024, 768);
+    mapLayer.opacity = 0.6;
     [self.view.layer addSublayer:mapLayer];
+    
+    maskLayer = [CALayer layer];
+    maskLayer.backgroundColor = [[UIColor clearColor] CGColor];
+    maskLayer.position = CGPointMake(0.0, 0.0);
+    maskLayer.anchorPoint = CGPointMake(0.5, 0.5);
+    maskLayer.bounds = CGRectMake(0, 0, 1024, 768);
+    maskLayer.frame = CGRectMake(0, 0, 1024, 768);
+    [self.view.layer addSublayer:maskLayer];
     
     cloud1Layer = [CALayer layer];
     UIImage *cloud1Image = [UIImage imageNamed:@"cloud1"];
@@ -63,9 +72,10 @@ static const int ARTICLE_NUMBER = 27;
     cloud1Layer.bounds = CGRectMake(0, 0, 181, 80);
     cloud1Layer.frame = CGRectMake(200, 300, 181, 80);
     cloud1Layer.name = @"cloud1";
+    cloud1Layer.opacity = 0.6;
     cloud1SwingAnimated = NO;
     [self performAnimation:cloud1Layer];
-    [self.view.layer addSublayer:cloud1Layer];
+    [maskLayer addSublayer:cloud1Layer];
     
     cloud2Layer = [CALayer layer];
     UIImage *cloud2Image = [UIImage imageNamed:@"cloud2"];
@@ -76,8 +86,9 @@ static const int ARTICLE_NUMBER = 27;
     cloud2Layer.frame = CGRectMake(400, 140, 135, 58);
     cloud2Layer.name = @"cloud2";
     cloud2SwingAnimated = NO;
+    cloud2Layer.opacity = 0.6;
     [self performAnimation:cloud2Layer];
-    [self.view.layer addSublayer:cloud2Layer];
+    [maskLayer addSublayer:cloud2Layer];
 
     cloud3Layer = [CALayer layer];
     UIImage *cloud3Image = [UIImage imageNamed:@"cloud3"];
@@ -87,9 +98,10 @@ static const int ARTICLE_NUMBER = 27;
     cloud3Layer.bounds = CGRectMake(0, 0, 135, 59);
     cloud3Layer.frame = CGRectMake(740, 240, 135, 59);
     cloud3Layer.name = @"cloud3";
+    cloud3Layer.opacity = 0.6;
     cloud3SwingAnimated = NO;
     [self performAnimation:cloud3Layer];
-    [self.view.layer addSublayer:cloud3Layer];
+    [maskLayer addSublayer:cloud3Layer];
 
     cloud4Layer = [CALayer layer];
     UIImage *cloud4Image = [UIImage imageNamed:@"cloud4"];
@@ -99,19 +111,11 @@ static const int ARTICLE_NUMBER = 27;
     cloud4Layer.bounds = CGRectMake(0, 0, 125, 54);
     cloud4Layer.frame = CGRectMake(790, 480, 125, 54);
     cloud4Layer.name = @"cloud4";
+    cloud4Layer.opacity = 0.6;
     cloud4SwingAnimated = NO;
     [self performAnimation:cloud4Layer];
-    [self.view.layer addSublayer:cloud4Layer];
+    [maskLayer addSublayer:cloud4Layer];
 
-    maskLayer = [CALayer layer];
-    maskLayer.backgroundColor = [[UIColor whiteColor] CGColor];
-    maskLayer.position = CGPointMake(0.0, 0.0);
-    maskLayer.anchorPoint = CGPointMake(0.5, 0.5);
-    maskLayer.bounds = CGRectMake(0, 0, 1024, 768);
-    maskLayer.frame = CGRectMake(0, 0, 1024, 768);
-    maskLayer.opacity = 0.6;
-    [self.view.layer addSublayer:maskLayer];
-    
     logoTextLayer = [CALayer layer];
     UIImage *academicImage = [UIImage imageNamed:@"yueluAcademic"];
     logoTextLayer.contents = (__bridge id)[academicImage CGImage];
@@ -119,7 +123,7 @@ static const int ARTICLE_NUMBER = 27;
     logoTextLayer.anchorPoint = CGPointMake(0.5, 0.5);
     logoTextLayer.bounds = CGRectMake(0, 0, 458, 458);
     logoTextLayer.frame = CGRectMake(283, 155, 458, 458);
-    [self.view.layer addSublayer:logoTextLayer];
+    [maskLayer addSublayer:logoTextLayer];
     
     arrowLayer = [CALayer layer];
     UIImage *arrowImage = [UIImage imageNamed:@"downIcon1"];
@@ -128,7 +132,7 @@ static const int ARTICLE_NUMBER = 27;
     arrowLayer.anchorPoint = CGPointMake(0.5, 0.5);
     arrowLayer.bounds = CGRectMake(0, 0, 45, 45);
     arrowLayer.frame = CGRectMake(467, 700, 45, 45);
-    [self.view.layer addSublayer:arrowLayer];
+    [maskLayer addSublayer:arrowLayer];
     
     /*
     articleMapLayer = [CALayer layer];
@@ -142,7 +146,7 @@ static const int ARTICLE_NUMBER = 27;
     isAddDirectionView = NO;
     isAnimation = NO;
     isHidden = NO;
-    [self initMapArticleDirectionView];
+    
 }
 
 -(void)performAnimation:(CALayer *)layer
