@@ -137,6 +137,7 @@
         //[homeViewController executeScrollMap:diff];
     }
     
+    /*
     if (newContentOffsetY >= 568 && newContentOffsetY <= 1236)
     {
         [homeViewController addArticleDirectionView];
@@ -149,6 +150,7 @@
             [homeViewController hideAllArticleDirectionView];
         }
     }
+     */
 }
 
 

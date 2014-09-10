@@ -30,7 +30,7 @@
     
     ArticleDirectionBlockView *articleDirectionBlockView;
     
-    NSMutableArray *directionViewModelArray;
+   // NSMutableArray *directionViewModelArray;
     NSMutableArray *directionViewArray;
     BOOL isAddDirectionView;
     BOOL isAnimation;

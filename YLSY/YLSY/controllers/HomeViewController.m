@@ -22,10 +22,15 @@
 @synthesize isAddDirectionView;
 
 static const int articleArraySign[27][3] = {
-    {280,452,30},{330,402,30},{438,307,30},{410,208,30},{510,248,30},{650,288,30},{580,418,30},{680,538,30},{680,368,30},{718,302,30},
-    {823,328,30},{853,208,30},{630,158,30},{570,110,30},{730,200,15},{755,178,5},{795,184,15},{675,50,30},{765,93,20},{800,110,10},
-    {840,125,10},{845,55,10},{885,62,20},{775,100,30},{590,100,30},{345,32,30},{115,352,30}
+    {280,452,30},{330,402,30},{438,307,30},{410,208,30},{510,248,30},
+    {650,288,30},{580,418,30},{680,538,30},{680,368,30},{718,302,30},
+    {823,328,30},{853,208,30},{630,158,30},{570,110,30},{730,200,15},
+    {755,178,5},{795,184,15},{675,50,30},{765,93,20},{800,110,10},
+    {840,125,10},{845,55,10},{885,62,20},{775,100,30},{590,100,30},
+    {345,32,30},{115,352,30}
 };
+
+static const int ARTICLE_NUMBER = 27;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -195,14 +200,12 @@ static const int articleArraySign[27][3] = {
     if (!isAddDirectionView)
     {
         isAddDirectionView = YES;
-        ArticleMapDirectionViewModel *dModelView = nil;
         directionViewArray = [[NSMutableArray alloc] init];
-        for (int i = 0; i < [directionViewModelArray count]; i++)
+        for (int i = 0; i < ARTICLE_NUMBER; i++)
         {
-            dModelView = [directionViewModelArray objectAtIndex:i];
-            articleDirectionBlockView = [[ArticleDirectionBlockView alloc] initWithFrame:CGRectMake(dModelView.xValue, dModelView.yValue, 60, 60 + dModelView.hightLenght)];
+            articleDirectionBlockView = [[ArticleDirectionBlockView alloc] initWithFrame:CGRectMake(articleArraySign[i][0], articleArraySign[i][1], 60, 60 + articleArraySign[i][2])];
             articleDirectionBlockView.articleNumber = i + 1;
-            articleDirectionBlockView.lineHeight = dModelView.hightLenght;
+            articleDirectionBlockView.lineHeight = articleArraySign[i][2];
             [articleDirectionBlockView setNeedsDisplay];
             articleDirectionBlockView.backgroundColor = [UIColor clearColor];
             [self.view addSubview:articleDirectionBlockView];
@@ -246,177 +249,6 @@ static const int articleArraySign[27][3] = {
             articleView.frame = CGRectMake(articleView.frame.origin.x, articleView.frame.origin.y - 30, articleView.frame.size.width, articleView.frame.size.height);
         }
     }
-}
-
--(void) initMapArticleDirectionView
-{
-    directionViewModelArray = [[NSMutableArray alloc] init];
-    
-    ArticleMapDirectionViewModel *dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 280;
-    dModelView.yValue = 1220;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 330;
-    dModelView.yValue = 1170;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 438;
-    dModelView.yValue = 1075;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 410;
-    dModelView.yValue = 976;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 510;
-    dModelView.yValue = 1016;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 650;
-    dModelView.yValue = 1056;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 580;
-    dModelView.yValue = 1186;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 680;
-    dModelView.yValue = 1306;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 680;
-    dModelView.yValue = 1136;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 718;
-    dModelView.yValue = 1070;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    //==========================================================
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 823;
-    dModelView.yValue = 1096;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 853;
-    dModelView.yValue = 976;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 630;
-    dModelView.yValue = 926;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 570;
-    dModelView.yValue = 878.0;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 730;
-    dModelView.yValue = 968.0;
-    dModelView.hightLenght = 15.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 755;
-    dModelView.yValue = 946.0;
-    dModelView.hightLenght = 5.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 795;
-    dModelView.yValue = 952.0;
-    dModelView.hightLenght = 15.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 675;
-    dModelView.yValue = 818.0;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 765;
-    dModelView.yValue = 861.0;
-    dModelView.hightLenght = 20.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 800;
-    dModelView.yValue = 878.0;
-    dModelView.hightLenght = 10.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    //==========================================================
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 840;
-    dModelView.yValue = 893.0;
-    dModelView.hightLenght = 10.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 845;
-    dModelView.yValue = 823.0;
-    dModelView.hightLenght = 10.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 885;
-    dModelView.yValue = 830.0;
-    dModelView.hightLenght = 20.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 775;
-    dModelView.yValue = 765.0;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 590;
-    dModelView.yValue = 760.0;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 345;
-    dModelView.yValue = 800.0;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
-    
-    dModelView = [[ArticleMapDirectionViewModel alloc] init];
-    dModelView.xValue = 115;
-    dModelView.yValue = 1120.0;
-    dModelView.hightLenght = 30.0;
-    [directionViewModelArray addObject:dModelView];
 }
 
 - (void)didReceiveMemoryWarning
