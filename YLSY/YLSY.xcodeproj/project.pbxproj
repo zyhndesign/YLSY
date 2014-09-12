@@ -23,6 +23,7 @@
 		D50C825F19AC260B00A6C04C /* HistoryThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = D50C825E19AC260B00A6C04C /* HistoryThumbView.m */; };
 		D50C826219AC2BA800A6C04C /* HistoryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D50C826119AC2BA800A6C04C /* HistoryScrollView.m */; };
 		D50C826519AC762200A6C04C /* SlidingBlockLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D50C826419AC762200A6C04C /* SlidingBlockLayer.m */; };
+		D50FD4A319C2C329005CF168 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50FD4A219C2C329005CF168 /* ContentViewController.m */; };
 		D5113A3619AD958E004057BA /* ArticleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5113A3519AD958E004057BA /* ArticleModel.m */; };
 		D535A3E819AB2F53006198CE /* HumanityThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = D535A3E719AB2F53006198CE /* HumanityThumbView.m */; };
 		D58559DC19B004A600BA1883 /* ArticleDirectionBlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = D58559DB19B004A600BA1883 /* ArticleDirectionBlockView.m */; };
@@ -108,6 +109,9 @@
 		D50C826119AC2BA800A6C04C /* HistoryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryScrollView.m; sourceTree = "<group>"; };
 		D50C826319AC762200A6C04C /* SlidingBlockLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingBlockLayer.h; sourceTree = "<group>"; };
 		D50C826419AC762200A6C04C /* SlidingBlockLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingBlockLayer.m; sourceTree = "<group>"; };
+		D50FD4A119C2C329005CF168 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		D50FD4A219C2C329005CF168 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		D50FD4A519C2D36B005CF168 /* WindowOperationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WindowOperationProtocol.h; sourceTree = "<group>"; };
 		D5113A3419AD958E004057BA /* ArticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleModel.h; sourceTree = "<group>"; };
 		D5113A3519AD958E004057BA /* ArticleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleModel.m; sourceTree = "<group>"; };
 		D535A3E619AB2F53006198CE /* HumanityThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanityThumbView.h; sourceTree = "<group>"; };
@@ -247,6 +251,14 @@
 			path = tools;
 			sourceTree = "<group>";
 		};
+		D50FD4A419C2D31D005CF168 /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D50FD4A519C2D36B005CF168 /* WindowOperationProtocol.h */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
 		D5113A3319AD9563004057BA /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +303,7 @@
 		D5B8A33619A5DCEE0088DE32 /* YLSY */ = {
 			isa = PBXGroup;
 			children = (
+				D50FD4A419C2D31D005CF168 /* protocols */,
 				D5113A3319AD9563004057BA /* model */,
 				D504D16619AABFB300464770 /* UIView */,
 				D50BDEDA19A6E7C800BA90E6 /* tools */,
@@ -364,6 +377,8 @@
 				D504D18019AACADA00464770 /* StoryTopViewController.m */,
 				D504D18219AACB0000464770 /* BottomViewController.h */,
 				D504D18319AACB0000464770 /* BottomViewController.m */,
+				D50FD4A119C2C329005CF168 /* ContentViewController.h */,
+				D50FD4A219C2C329005CF168 /* ContentViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -565,6 +580,7 @@
 				D5B8A3B319A5E32C0088DE32 /* POPLayerExtras.mm in Sources */,
 				D5B8A34119A5DCEE0088DE32 /* AppDelegate.m in Sources */,
 				D5089B0419B6A1170097C248 /* StoryContentView.m in Sources */,
+				D50FD4A319C2C329005CF168 /* ContentViewController.m in Sources */,
 				D5B8A3A719A5E32C0088DE32 /* POPAnimatableProperty.mm in Sources */,
 				D5B8A3B519A5E32C0088DE32 /* POPPropertyAnimation.mm in Sources */,
 				D50C826519AC762200A6C04C /* SlidingBlockLayer.m in Sources */,

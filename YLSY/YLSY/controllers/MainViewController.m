@@ -140,13 +140,36 @@
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
 {
     newContentOffsetY = _scrollView.contentOffset.y;
-    
-    if (newContentOffsetY < 768)
+   
+    if (newContentOffsetY > 400)
     {
-        CGFloat diff = newContentOffsetY - oldContentOffsetY;
-        //[homeViewController executeScrollMap:diff];
+        [recommandViewController initContentFlyIn];
     }
     
+    if (newContentOffsetY > 1408 && newContentOffsetY < 1608)
+    {
+        [historyTopViewController setLeftImagePosition:(200 - (1608 - newContentOffsetY))];
+    }
+    
+    if (newContentOffsetY > 2900 && newContentOffsetY < 3100)
+    {
+        [sceneTopViewController setLeftImagePosition:(200 - (3100 - newContentOffsetY))];
+    }
+    
+    if (newContentOffsetY > 4390 && newContentOffsetY < 4590)
+    {
+        [humanityTopViewController setLeftImagePosition:(200 - (4590 - newContentOffsetY))];
+    }
+    
+    if (newContentOffsetY > 5990 && newContentOffsetY < 6190)
+    {
+        [storyTopViewController setLeftImagePosition:(200 - (6190 - newContentOffsetY))];
+    }
+    
+    if (newContentOffsetY > 3400)
+    {
+        [sceneViewController initContentFlyIn];
+    }
     /*
     if (newContentOffsetY >= 568 && newContentOffsetY <= 1236)
     {

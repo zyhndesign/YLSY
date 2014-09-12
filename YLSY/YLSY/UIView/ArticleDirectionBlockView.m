@@ -33,21 +33,21 @@
     CGContextSetLineWidth(ctx, 2.0);
     CGContextSetRGBStrokeColor(ctx, 254, 0, 0, 1);
     
-    CGContextMoveToPoint(ctx, 30.0, 15.0);
-    CGContextAddLineToPoint(ctx, 30.0, 60 + lineHeight);
+    CGContextMoveToPoint(ctx, 15.0, 15.0);
+    CGContextAddLineToPoint(ctx, 15.0, 60 + lineHeight);
     CGContextStrokePath(ctx);
     
     //CGContextAddEllipseInRect(ctx, CGRectMake( 0.0, 150, 60.0, 60.0));
     CGContextSetRGBFillColor(ctx, 254.0, 0.0, 0.0, 1);
-    CGContextFillEllipseInRect(ctx, CGRectMake( 15.0, 0, 30.0, 30.0));
-    CGContextFillEllipseInRect(ctx, CGRectMake( 24.0, 48 + lineHeight, 12.0, 12.0));
+    CGContextFillEllipseInRect(ctx, CGRectMake( 0.0, 0, 30.0, 30.0));
+    CGContextFillEllipseInRect(ctx, CGRectMake( 9.0, 48 + lineHeight, 12.0, 12.0));
     
     numLayer = [CATextLayer layer];
     numLayer.string = [[NSNumber numberWithInt:articleNumber] stringValue];
     numLayer.position = CGPointMake(0.0, 0.0);
     numLayer.anchorPoint = CGPointMake(0.5, 0.5);
-    numLayer.bounds = CGRectMake(0, 0, 60, 30);
-    numLayer.frame = CGRectMake(0.0,0.0, 60.0, 60.0);
+    numLayer.bounds = CGRectMake(0, 0, 30, 30);
+    numLayer.frame = CGRectMake(0.0,0.0, 30.0, 60.0);
     numLayer.fontSize = 23;
     numLayer.alignmentMode = kCAAlignmentCenter;
     [self.layer addSublayer:numLayer];

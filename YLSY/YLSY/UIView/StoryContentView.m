@@ -8,21 +8,23 @@
 
 #import "StoryContentView.h"
 #import "../model/ArticleModel.h"
+#import "ContentViewController.h"
 
 @implementation StoryContentView
 
-@synthesize articleArray;
+@synthesize articleArray, controller;
 
 static int a[15][2] = {
     {0,5},{165,5},{330,5},{495,5},{660,5},
     {0,170},{165,170},{330,170},{495,170},{660,170},
     {0,335},{165,335},{330,335},{495,335},{660,335}};
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame andController:(UIViewController *) _controller
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        self.controller = _controller;
     }
     return self;
 }
@@ -51,6 +53,9 @@ static int a[15][2] = {
 -(void) tapImage:(UIGestureRecognizer *)gesture
 {
     NSLog(@"%ld",(long)gesture.view.tag);
+    ContentViewController *content = [[ContentViewController alloc] init];
+    [controller.self presentViewController:content animated:YES completion:^{
+    }];
 }
 
 /*

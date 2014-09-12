@@ -13,6 +13,7 @@
 #import "../libs/pop/POPSpringAnimation.h"
 #import "../UIView/ArticleDirectionBlockView.h"
 #import "../model/ArticleMapDirectionViewModel.h"
+#import "ContentViewController.h"
 
 @interface HomeViewController ()
 
@@ -249,17 +250,31 @@ static const int ARTICLE_NUMBER = 27;
     {
         isAddDirectionView = YES;
         directionViewArray = [[NSMutableArray alloc] init];
+        UITapGestureRecognizer *tapGesture = nil;
         for (int i = 0; i < ARTICLE_NUMBER; i++)
         {
-            articleDirectionBlockView = [[ArticleDirectionBlockView alloc] initWithFrame:CGRectMake(articleArraySign[i][0], articleArraySign[i][1], 60, 60 + articleArraySign[i][2])];
+            tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(articleTap:)];
+            articleDirectionBlockView = [[ArticleDirectionBlockView alloc] initWithFrame:CGRectMake(articleArraySign[i][0], articleArraySign[i][1], 30, 60 + articleArraySign[i][2])];
             articleDirectionBlockView.articleNumber = i + 1;
             articleDirectionBlockView.lineHeight = articleArraySign[i][2];
             [articleDirectionBlockView setNeedsDisplay];
-            articleDirectionBlockView.backgroundColor = [UIColor clearColor];
+            articleDirectionBlockView.backgroundColor = [UIColor clearColor] ;
             [self.view addSubview:articleDirectionBlockView];
+            articleDirectionBlockView.userInteractionEnabled = YES;
+            [articleDirectionBlockView addGestureRecognizer:tapGesture];
             [directionViewArray addObject:articleDirectionBlockView];
         }
     }
+}
+
+-(void)articleTap:(UIGestureRecognizer *) gesture
+{
+    ArticleDirectionBlockView *blockView = (ArticleDirectionBlockView *)gesture.view;
+    NSLog(@"%d", blockView.articleNumber);
+    ContentViewController *content = [[ContentViewController alloc] init];
+    [self presentViewController:content animated:YES completion:^{
+        
+    }];
 }
 
 -(void) addAnimForDirectionView

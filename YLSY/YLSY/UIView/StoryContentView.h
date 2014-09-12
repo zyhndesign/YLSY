@@ -11,8 +11,11 @@
 @interface StoryContentView : UIView
 {
     NSMutableArray *articleArray;
+    UIViewController *controller;
 }
 
-@property (nonatomic) NSMutableArray *articleArray;
+- (id)initWithFrame:(CGRect)frame andController:(UIViewController *) _controller;
 
+@property (nonatomic) NSMutableArray *articleArray;
+@property (nonatomic) UIViewController *controller;
 @end

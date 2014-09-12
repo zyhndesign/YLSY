@@ -97,13 +97,13 @@
     articleModel.articleId = 12;
     [array addObject:articleModel];
     
-    contentView1 = [[StoryContentView alloc] initWithFrame:CGRectMake(100, 150, 850, 560)];
+    contentView1 = [[StoryContentView alloc] initWithFrame:CGRectMake(100, 150, 850, 560) andController:self] ;
     contentView1.backgroundColor = [UIColor clearColor];
     contentView1.articleArray = array;
     contentView1ISBack = NO;
     [self.view addSubview:contentView1];
     
-    contentView2 = [[StoryContentView alloc] initWithFrame:CGRectMake(100, 150, 850, 560)];
+    contentView2 = [[StoryContentView alloc] initWithFrame:CGRectMake(100, 150, 850, 560) andController:self];
     contentView2.backgroundColor = [UIColor clearColor];
     contentView2.articleArray = array;
     contentView2.transform = CGAffineTransformMakeScale(0.5, 0.5);
@@ -129,6 +129,7 @@
 
 -(void) executeLeftButtonAnimOfFrontView:(UIView *)view1 AndBackView:(UIView *)view2
 {
+    [leftArrowView setUserInteractionEnabled:NO];
     [view1 pop_removeAllAnimations];
     POPSpringAnimation *animBlock1 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
     animBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(1455, view1.center.y)];
@@ -164,6 +165,7 @@
         {
             contentView1ISBack = NO;
         }
+        [leftArrowView setUserInteractionEnabled:YES];
     }];
     [view2.layer pop_addAnimation:animBlock2 forKey:@"Animation"];
 }
@@ -186,6 +188,7 @@
 -(void) executeRightButtonAnimOfFrontView:(UIView *)view1 AndBackView:(UIView *)view2
 {
     [view1 pop_removeAllAnimations];
+    [rightArrowView setUserInteractionEnabled:NO];
     POPSpringAnimation *animBlock1 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
     animBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(-575, view1.center.y)];
     animBlock1.springSpeed = 1;
@@ -219,6 +222,7 @@
         {
             contentView1ISBack = NO;
         }
+        [rightArrowView setUserInteractionEnabled:YES];
     }];
     [view2.layer pop_addAnimation:animBlock2 forKey:@"Animation"];
 }

@@ -22,5 +22,9 @@
     UITapGestureRecognizer *leftArrowTap;
     UITapGestureRecognizer *rightArrowTap;
    
+    BOOL firstInit;
 }
+
+-(void) initContentFlyIn;
+
 @end

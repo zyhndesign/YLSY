@@ -12,6 +12,8 @@
 {
     CALayer *titleLayer;
     CALayer *imageLayer;
-    
 }
+
+-(void) setLeftImagePosition:(float)position;
+
 @end

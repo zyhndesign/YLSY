@@ -44,8 +44,14 @@
     imageLayer.position = CGPointMake(0.0, 0.0);
     imageLayer.anchorPoint = CGPointMake(0.5, 0.5);
     imageLayer.bounds = CGRectMake(0, 0, 497, 352);
-    imageLayer.frame = CGRectMake(527, 406, 497, 352);
+    imageLayer.frame = CGRectMake(727, 606, 497, 352);
     [self.view.layer addSublayer:imageLayer];
+}
+
+-(void) setLeftImagePosition:(float)position
+{
+    NSLog(@"%f",position);
+    imageLayer.frame = CGRectMake(727 - position, 606 - position, 497, 352);
 }
 
 - (void)didReceiveMemoryWarning
