@@ -19,5 +19,6 @@
     HumanityThumbView *twoThumbView;
     HumanityThumbView *threeThumbView;
     
+    UIPageControl *pageController;
 }
 @end

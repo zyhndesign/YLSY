@@ -224,6 +224,7 @@ static const int ARTICLE_NUMBER = 27;
         [self addArticleDirectionView];
         [self addAnimForDirectionView];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SET_SCRILLVIEW_SCROLL_ENABLE" object:nil userInfo:nil];
+        maskView.hidden = YES;
     }];
     [maskView pop_addAnimation:anim forKey:@"centerAnimation"];
 }

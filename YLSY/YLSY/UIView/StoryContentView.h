@@ -12,10 +12,12 @@
 {
     NSMutableArray *articleArray;
     UIViewController *controller;
+    UIPageControl *pageController;
 }
 
 - (id)initWithFrame:(CGRect)frame andController:(UIViewController *) _controller;
 
 @property (nonatomic) NSMutableArray *articleArray;
 @property (nonatomic) UIViewController *controller;
+@property (nonatomic) UIPageControl *pageController;
 @end

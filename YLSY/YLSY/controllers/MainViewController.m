@@ -111,7 +111,7 @@
     viewHeight += bottomViewController.view.frame.size.height;
     mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width, viewHeight);
     
-    mainScrollView.bounces = NO;
+    mainScrollView.bounces = YES;
     mainScrollView.delegate = self;
     mainScrollView.scrollEnabled = NO;
     

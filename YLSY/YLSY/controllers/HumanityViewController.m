@@ -57,6 +57,14 @@
     threeThumbView = [[HumanityThumbView alloc] initWithFrame:CGRectMake(642, 230, 201, 300)];
     threeThumbView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:threeThumbView];
+    
+    pageController = [[UIPageControl alloc] init];
+    pageController.center = CGPointMake(self.view.center.x, 630);
+    pageController.numberOfPages = 10;
+    pageController.currentPage = 0;
+    pageController.pageIndicatorTintColor = [UIColor grayColor];
+    pageController.currentPageIndicatorTintColor = [UIColor colorWithRed:254 green:0 blue:0 alpha:1];
+    [self.view addSubview:pageController];
 }
 
 -(void)leftArrowViewClick:(UIGestureRecognizer *)gesture
