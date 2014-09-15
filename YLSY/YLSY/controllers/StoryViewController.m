@@ -110,6 +110,14 @@
     contentView2.hidden = YES;
     contentView2ISBack = YES;
     [self.view addSubview:contentView2];
+    
+    pageController = [[UIPageControl alloc] init];
+    pageController.center = CGPointMake(self.view.center.x, 700);
+    pageController.numberOfPages = 10;
+    pageController.currentPage = 0;
+    pageController.pageIndicatorTintColor = [UIColor grayColor];
+    pageController.currentPageIndicatorTintColor = [UIColor colorWithRed:254 green:0 blue:0 alpha:1];
+    [self.view addSubview:pageController];
 }
 
 -(void)leftArrowTapClick:(UIGestureRecognizer *)gesture

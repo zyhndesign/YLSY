@@ -24,6 +24,11 @@
     UITapGestureRecognizer *leftArrowTap;
     UITapGestureRecognizer *rightArrowTap;
     BOOL firstInit;
+    
+    UIPageControl *pageController;
+    
+    int pageNum;
+    int currentPage;
 }
 
 -(void) initContentFlyIn;

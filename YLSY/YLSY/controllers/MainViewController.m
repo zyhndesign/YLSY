@@ -161,6 +161,11 @@
         [humanityTopViewController setLeftImagePosition:(200 - (4590 - newContentOffsetY))];
     }
     
+    if (newContentOffsetY > 4890)
+    {
+        [humanityViewController initContentFlyIn];
+    }
+    
     if (newContentOffsetY > 5990 && newContentOffsetY < 6190)
     {
         [storyTopViewController setLeftImagePosition:(200 - (6190 - newContentOffsetY))];

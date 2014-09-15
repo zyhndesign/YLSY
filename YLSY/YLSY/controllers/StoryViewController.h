@@ -23,5 +23,7 @@
     
     BOOL leftSign;
     BOOL rightSign;
+    
+    UIPageControl *pageController;
 }
 @end

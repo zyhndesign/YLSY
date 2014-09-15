@@ -66,6 +66,16 @@
     rightArrowTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightClick:)];
     [rightArrowView addGestureRecognizer:rightArrowTap];
     
+    pageNum = 10;
+    currentPage = 0;
+    
+    pageController = [[UIPageControl alloc] init];
+    pageController.center = CGPointMake(self.view.center.x, 630);
+    pageController.numberOfPages = pageNum;
+    pageController.currentPage = currentPage;
+    pageController.pageIndicatorTintColor = [UIColor grayColor];
+    pageController.currentPageIndicatorTintColor = [UIColor colorWithRed:254 green:0 blue:0 alpha:1];
+    [self.view addSubview:pageController];
     
     firstInit = YES;
 }
@@ -103,126 +113,146 @@
 
 -(void) leftClick:(UIGestureRecognizer *)recognizer
 {
-    NSLog(@"LEFT CLICK");
-    [leftArrowView setUserInteractionEnabled:NO];
-    [oneThumbView.layer pop_removeAllAnimations];
-    POPBasicAnimation *animBlock1 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    animBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(oneThumbView.center.x + 988, oneThumbView.center.y)];
-    animBlock1.duration = 0.3;
-    [animBlock1 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
-        if (isFinish)
+    if (currentPage > 0)
+    {
+        NSLog(@"LEFT CLICK");
+        [leftArrowView setUserInteractionEnabled:NO];
+        [oneThumbView.layer pop_removeAllAnimations];
+        POPBasicAnimation *animBlock1 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
+        animBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(oneThumbView.center.x + 988, oneThumbView.center.y)];
+        animBlock1.duration = 0.3;
+        [animBlock1 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
+            if (isFinish)
+            {
+                
+                [oneThumbView.layer pop_removeAllAnimations];
+                oneThumbView.center = CGPointMake(oneThumbView.center.x - 1024, oneThumbView.center.y);
+                
+                POPSpringAnimation *animNestBlock1 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+                animNestBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(282, oneThumbView.center.y)];
+                animNestBlock1.springSpeed = 1;
+                [oneThumbView pop_addAnimation:animNestBlock1 forKey:@"Animation"];
+                
+            }
+        }];
+        [oneThumbView.layer pop_addAnimation:animBlock1 forKey:@"Animation"];
+        
+        [twoThumbView pop_removeAllAnimations];
+        POPBasicAnimation *animBlock2 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
+        animBlock2.toValue = [NSValue valueWithCGPoint:CGPointMake(twoThumbView.center.x + 758, twoThumbView.center.y)];
+        animBlock2.duration = 0.3;
+        [animBlock2 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
+            if (isFinish)
+            {
+                [twoThumbView pop_removeAllAnimations];
+                twoThumbView.center = CGPointMake(twoThumbView.center.x - 1024, twoThumbView.center.y);
+                POPSpringAnimation *animNestBlock2 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+                animNestBlock2.toValue = [NSValue valueWithCGPoint:CGPointMake(512, twoThumbView.center.y)];
+                animNestBlock2.springSpeed = 1;
+                [twoThumbView pop_addAnimation:animNestBlock2 forKey:@"Animation"];
+            }
+        }];
+        [twoThumbView.layer pop_addAnimation:animBlock2 forKey:@"Animation"];
+        
+        [threeThumbView pop_removeAllAnimations];
+        POPBasicAnimation *animBlock3 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
+        animBlock3.toValue = [NSValue valueWithCGPoint:CGPointMake(threeThumbView.center.x + 528, threeThumbView.center.y)];
+        animBlock3.duration = 0.3;
+        
+        [animBlock3 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
+            if (isFinish)
+            {
+                [threeThumbView pop_removeAllAnimations];
+                threeThumbView.center = CGPointMake(threeThumbView.center.x - 1024, threeThumbView.center.y);
+                POPSpringAnimation *animNestBlock3 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+                animNestBlock3.toValue = [NSValue valueWithCGPoint:CGPointMake(742, oneThumbView.center.y)];
+                animNestBlock3.springSpeed = 1;
+                [threeThumbView pop_addAnimation:animNestBlock3 forKey:@"Animation"];
+                [leftArrowView setUserInteractionEnabled:YES];
+            }
+        }];
+        [threeThumbView.layer pop_addAnimation:animBlock3 forKey:@"Animation"];
+        currentPage--;
+        rightArrowView.hidden = NO;
+        if (currentPage == 0)
         {
-            
-            [oneThumbView.layer pop_removeAllAnimations];
-            oneThumbView.center = CGPointMake(oneThumbView.center.x - 1024, oneThumbView.center.y);
-            
-            POPSpringAnimation *animNestBlock1 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
-            animNestBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(282, oneThumbView.center.y)];
-            animNestBlock1.springSpeed = 1;
-            [oneThumbView pop_addAnimation:animNestBlock1 forKey:@"Animation"];
-            
+            leftArrowView.hidden = YES;
         }
-    }];
-    [oneThumbView.layer pop_addAnimation:animBlock1 forKey:@"Animation"];
+    }
     
-    [twoThumbView pop_removeAllAnimations];
-    POPBasicAnimation *animBlock2 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    animBlock2.toValue = [NSValue valueWithCGPoint:CGPointMake(twoThumbView.center.x + 758, twoThumbView.center.y)];
-    animBlock2.duration = 0.3;
-    [animBlock2 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
-        if (isFinish)
-        {
-            [twoThumbView pop_removeAllAnimations];
-            twoThumbView.center = CGPointMake(twoThumbView.center.x - 1024, twoThumbView.center.y);
-            POPSpringAnimation *animNestBlock2 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
-            animNestBlock2.toValue = [NSValue valueWithCGPoint:CGPointMake(512, twoThumbView.center.y)];
-            animNestBlock2.springSpeed = 1;
-            [twoThumbView pop_addAnimation:animNestBlock2 forKey:@"Animation"];
-        }
-    }];
-    [twoThumbView.layer pop_addAnimation:animBlock2 forKey:@"Animation"];
-    
-    [threeThumbView pop_removeAllAnimations];
-    POPBasicAnimation *animBlock3 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    animBlock3.toValue = [NSValue valueWithCGPoint:CGPointMake(threeThumbView.center.x + 528, threeThumbView.center.y)];
-    animBlock3.duration = 0.3;
-    
-    [animBlock3 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
-        if (isFinish)
-        {
-            [threeThumbView pop_removeAllAnimations];
-            threeThumbView.center = CGPointMake(threeThumbView.center.x - 1024, threeThumbView.center.y);
-            POPSpringAnimation *animNestBlock3 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
-            animNestBlock3.toValue = [NSValue valueWithCGPoint:CGPointMake(742, oneThumbView.center.y)];
-            animNestBlock3.springSpeed = 1;
-            [threeThumbView pop_addAnimation:animNestBlock3 forKey:@"Animation"];
-            [leftArrowView setUserInteractionEnabled:YES];
-        }
-    }];
-    [threeThumbView.layer pop_addAnimation:animBlock3 forKey:@"Animation"];
-    
+    pageController.currentPage = currentPage;
 }
 
 -(void) rightClick:(UIGestureRecognizer *)recognizer
 {
-    NSLog(@"RIGHT CLICK");
-    [rightArrowView setUserInteractionEnabled:NO];
-    [oneThumbView.layer pop_removeAllAnimations];
-    POPBasicAnimation *animBlock1 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    animBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(oneThumbView.center.x - 364, oneThumbView.center.y)];
-    animBlock1.duration = 0.3;
-    [animBlock1 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
-        if (isFinish)
+    if (currentPage < pageNum)
+    {
+        NSLog(@"RIGHT CLICK");
+        [rightArrowView setUserInteractionEnabled:NO];
+        [oneThumbView.layer pop_removeAllAnimations];
+        POPBasicAnimation *animBlock1 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
+        animBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(oneThumbView.center.x - 364, oneThumbView.center.y)];
+        animBlock1.duration = 0.3;
+        [animBlock1 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
+            if (isFinish)
+            {
+                
+                [oneThumbView.layer pop_removeAllAnimations];
+                oneThumbView.center = CGPointMake(oneThumbView.center.x + 1024, oneThumbView.center.y);
+                
+                POPSpringAnimation *animNestBlock1 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+                animNestBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(282, oneThumbView.center.y)];
+                animNestBlock1.springSpeed = 1;
+                [oneThumbView pop_addAnimation:animNestBlock1 forKey:@"Animation"];
+                
+            }
+        }];
+        [oneThumbView.layer pop_addAnimation:animBlock1 forKey:@"Animation"];
+        
+        [twoThumbView pop_removeAllAnimations];
+        POPBasicAnimation *animBlock2 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
+        animBlock2.toValue = [NSValue valueWithCGPoint:CGPointMake(twoThumbView.center.x - 594, twoThumbView.center.y)];
+        animBlock2.duration = 0.3;
+        [animBlock2 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
+            if (isFinish)
+            {
+                [twoThumbView pop_removeAllAnimations];
+                twoThumbView.center = CGPointMake(twoThumbView.center.x + 1024, twoThumbView.center.y);
+                POPSpringAnimation *animNestBlock2 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+                animNestBlock2.toValue = [NSValue valueWithCGPoint:CGPointMake(512, twoThumbView.center.y)];
+                animNestBlock2.springSpeed = 1;
+                [twoThumbView pop_addAnimation:animNestBlock2 forKey:@"Animation"];
+            }
+        }];
+        [twoThumbView.layer pop_addAnimation:animBlock2 forKey:@"Animation"];
+        
+        [threeThumbView pop_removeAllAnimations];
+        POPBasicAnimation *animBlock3 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
+        animBlock3.toValue = [NSValue valueWithCGPoint:CGPointMake(threeThumbView.center.x - 824, threeThumbView.center.y)];
+        animBlock3.duration = 0.3;
+        
+        [animBlock3 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
+            if (isFinish)
+            {
+                [threeThumbView pop_removeAllAnimations];
+                threeThumbView.center = CGPointMake(threeThumbView.center.x + 1024, threeThumbView.center.y);
+                POPSpringAnimation *animNestBlock3 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+                animNestBlock3.toValue = [NSValue valueWithCGPoint:CGPointMake(742, oneThumbView.center.y)];
+                animNestBlock3.springSpeed = 1;
+                [threeThumbView pop_addAnimation:animNestBlock3 forKey:@"Animation"];
+                [rightArrowView setUserInteractionEnabled:YES];
+            }
+        }];
+        [threeThumbView.layer pop_addAnimation:animBlock3 forKey:@"Animation"];
+        leftArrowView.hidden = NO;
+        ++currentPage;
+        if (currentPage == pageNum - 1)
         {
-            
-            [oneThumbView.layer pop_removeAllAnimations];
-            oneThumbView.center = CGPointMake(oneThumbView.center.x + 1024, oneThumbView.center.y);
-            
-            POPSpringAnimation *animNestBlock1 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
-            animNestBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(282, oneThumbView.center.y)];
-            animNestBlock1.springSpeed = 1;
-            [oneThumbView pop_addAnimation:animNestBlock1 forKey:@"Animation"];
-            
+            rightArrowView.hidden = YES;
         }
-    }];
-    [oneThumbView.layer pop_addAnimation:animBlock1 forKey:@"Animation"];
+    }
     
-    [twoThumbView pop_removeAllAnimations];
-    POPBasicAnimation *animBlock2 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    animBlock2.toValue = [NSValue valueWithCGPoint:CGPointMake(twoThumbView.center.x - 594, twoThumbView.center.y)];
-    animBlock2.duration = 0.3;
-    [animBlock2 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
-        if (isFinish)
-        {
-            [twoThumbView pop_removeAllAnimations];
-            twoThumbView.center = CGPointMake(twoThumbView.center.x + 1024, twoThumbView.center.y);
-            POPSpringAnimation *animNestBlock2 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
-            animNestBlock2.toValue = [NSValue valueWithCGPoint:CGPointMake(512, twoThumbView.center.y)];
-            animNestBlock2.springSpeed = 1;
-            [twoThumbView pop_addAnimation:animNestBlock2 forKey:@"Animation"];
-        }
-    }];
-    [twoThumbView.layer pop_addAnimation:animBlock2 forKey:@"Animation"];
-    
-    [threeThumbView pop_removeAllAnimations];
-    POPBasicAnimation *animBlock3 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    animBlock3.toValue = [NSValue valueWithCGPoint:CGPointMake(threeThumbView.center.x - 824, threeThumbView.center.y)];
-    animBlock3.duration = 0.3;
-    
-    [animBlock3 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
-        if (isFinish)
-        {
-            [threeThumbView pop_removeAllAnimations];
-            threeThumbView.center = CGPointMake(threeThumbView.center.x + 1024, threeThumbView.center.y);
-            POPSpringAnimation *animNestBlock3 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
-            animNestBlock3.toValue = [NSValue valueWithCGPoint:CGPointMake(742, oneThumbView.center.y)];
-            animNestBlock3.springSpeed = 1;
-            [threeThumbView pop_addAnimation:animNestBlock3 forKey:@"Animation"];
-            [rightArrowView setUserInteractionEnabled:YES];
-        }
-    }];
-    [threeThumbView.layer pop_addAnimation:animBlock3 forKey:@"Animation"];
-    
+    pageController.currentPage = currentPage;
 }
 
 - (void)didReceiveMemoryWarning

@@ -20,5 +20,12 @@
     HumanityThumbView *threeThumbView;
     
     UIPageControl *pageController;
+    
+    BOOL firstInit;
+    
+    int pageNum;
+    int currentPage;
 }
+
+-(void) initContentFlyIn;
 @end
