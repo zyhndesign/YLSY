@@ -103,6 +103,11 @@
 		D5089B0319B6A1170097C248 /* StoryContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryContentView.m; sourceTree = "<group>"; };
 		D50BDEDF19A6ECC200BA90E6 /* POPAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPAnimationManager.h; sourceTree = "<group>"; };
 		D50BDEE019A6ECC200BA90E6 /* POPAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POPAnimationManager.m; sourceTree = "<group>"; };
+		D50C0AD219C7FAD300A4179F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D50C0AD319C7FB1A00A4179F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		D50C0AD419C7FB1A00A4179F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		D50C0AD519C7FB1A00A4179F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		D50C0AD619C7FB1A00A4179F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D50C825D19AC260B00A6C04C /* HistoryThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryThumbView.h; sourceTree = "<group>"; };
 		D50C825E19AC260B00A6C04C /* HistoryThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryThumbView.m; sourceTree = "<group>"; };
 		D50C826019AC2BA800A6C04C /* HistoryScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryScrollView.h; sourceTree = "<group>"; };
@@ -528,6 +533,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = D5B8A32419A5DCEE0088DE32;
 			productRefGroup = D5B8A32E19A5DCEE0088DE32 /* Products */;
@@ -638,6 +644,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				D5B8A33A19A5DCEE0088DE32 /* en */,
+				D50C0AD219C7FAD300A4179F /* Base */,
+				D50C0AD519C7FB1A00A4179F /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -646,6 +654,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D5B8A34319A5DCEE0088DE32 /* Base */,
+				D50C0AD319C7FB1A00A4179F /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -654,6 +663,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D5B8A35919A5DCEE0088DE32 /* en */,
+				D50C0AD619C7FB1A00A4179F /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -662,6 +672,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D5B8A3A419A5E32C0088DE32 /* en */,
+				D50C0AD419C7FB1A00A4179F /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
