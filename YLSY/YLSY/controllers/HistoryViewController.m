@@ -327,11 +327,8 @@
 {
     [sliderBlockLayer pop_removeAllAnimations];
     POPBasicAnimation *animBlock1 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    NSLog(@"%f",toValue);
     animBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(toValue + 12.0, sliderBlockLayer.position.y)];
-    
-    animBlock1.duration = 2.0;
-    
+    animBlock1.duration = 2.5;
     [sliderBlockLayer pop_addAnimation:animBlock1 forKey:@"Animation"];
 }
 
@@ -350,22 +347,22 @@
     articleModel = [ArticleModel new];
     articleModel.imagePath = @"historyContentPic";
     articleModel.titleText = @"[岳麓山]";
-    articleModel.yearValue = 1216;
-    articleModel.contentText = @"1216年始建于长沙城河西";
+    articleModel.yearValue = 816;
+    articleModel.contentText = @"816年始建于长沙城河西";
     [dataArray addObject:articleModel];
     
     articleModel = [ArticleModel new];
     articleModel.imagePath = @"historyContentPic";
     articleModel.titleText = @"[湖南大学]";
-    articleModel.yearValue = 1902;
-    articleModel.contentText = @"1902年始建于长沙城河西岳麓山大学城";
+    articleModel.yearValue = 1202;
+    articleModel.contentText = @"1202年始建于长沙城河西岳麓山大学城";
     [dataArray addObject:articleModel];
     
     articleModel = [ArticleModel new];
     articleModel.imagePath = @"historyContentPic";
     articleModel.titleText = @"[湖南师范大学]";
-    articleModel.yearValue = 1922;
-    articleModel.contentText = @"1922年始建于长沙城河西岳麓山大学城";
+    articleModel.yearValue = 1611;
+    articleModel.contentText = @"1611年始建于长沙城河西岳麓山大学城";
     [dataArray addObject:articleModel];
     
     articleModel = [ArticleModel new];
