@@ -25,6 +25,7 @@
     
     int pageNum;
     int currentPage;
+   
 }
 
 -(void) initContentFlyIn;

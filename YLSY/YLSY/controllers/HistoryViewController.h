@@ -34,8 +34,10 @@
     
     //用于计数内容当前访问位置
     int countNum;
-    
-    
+        
+    int maxYear;
+    int minYear;
+    double percentageOfAxis;
 }
 
 /**

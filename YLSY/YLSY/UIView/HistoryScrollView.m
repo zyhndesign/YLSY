@@ -32,17 +32,7 @@
     CGContextMoveToPoint(con, 0.0, 106);
     CGContextAddLineToPoint(con, 1024, 106);
     CGContextStrokePath(con);
-    
-    CGContextSetLineWidth(con, 1.0);
-    CGContextMoveToPoint(con, 0.0, 398);
-    CGContextAddLineToPoint(con, 1024, 398);
-    CGContextStrokePath(con);
-    
-    CGContextSetLineWidth(con, 3.0);
-    CGContextMoveToPoint(con, 0.0, 404);
-    CGContextAddLineToPoint(con, 1024, 404);
-    CGContextStrokePath(con);
-    
+        
     CGContextSetLineWidth(con, 2.0);
     CGContextMoveToPoint(con, 80.0, 650);
     CGContextAddLineToPoint(con, 944, 650);

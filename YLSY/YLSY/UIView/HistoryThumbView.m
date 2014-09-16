@@ -34,7 +34,7 @@
     UIFont *font = [UIFont fontWithName:@"Courier" size:30];
     UIColor *textColor = [UIColor colorWithRed:254 green:0 blue:0 alpha:1];
     NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:font, NSFontAttributeName,paragraphStyle, NSParagraphStyleAttributeName,textColor, NSForegroundColorAttributeName, nil];
-    [articleModel.timeText drawInRect:CGRectMake(CGImageGetWidth(imageCG) + 10, 0, 360,40) withAttributes:dict];
+    [[@"" stringByAppendingFormat:@"公元 %d 年",articleModel.yearValue] drawInRect:CGRectMake(CGImageGetWidth(imageCG) + 10, 0, 360,40) withAttributes:dict];
     
     font = [UIFont fontWithName:@"Courier" size:35];
     dict = [[NSDictionary alloc] initWithObjectsAndKeys:font, NSFontAttributeName,paragraphStyle, NSParagraphStyleAttributeName,textColor, NSForegroundColorAttributeName, nil];

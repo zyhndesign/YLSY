@@ -12,14 +12,14 @@
 {
     int articleId;
     NSString *imagePath;
-    NSString *timeText;
+    int yearValue;
     NSString *titleText;
     NSString *contentText;
 }
 
 @property (nonatomic) int articleId;
 @property (nonatomic) NSString *imagePath;
-@property (nonatomic) NSString *timeText;
+@property (nonatomic) int yearValue;
 @property (nonatomic) NSString *titleText;
 @property (nonatomic) NSString *contentText;
 

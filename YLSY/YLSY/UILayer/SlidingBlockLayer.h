@@ -11,5 +11,9 @@
 @interface SlidingBlockLayer : CALayer
 {
     CATextLayer *timeTextLayer;
+    int yearValue;
 }
+
+@property (nonatomic) int yearValue;
+
 @end

@@ -11,6 +11,7 @@
 #import "../UILayer/SlidingBlockLayer.h"
 #import "../UIView/HistoryThumbView.h"
 #import "../model/ArticleModel.h"
+#import "../libs/pop/POPBasicAnimation.h"
 
 @interface HistoryViewController ()
 
@@ -76,7 +77,7 @@
     sliderBlockLayer = [SlidingBlockLayer layer];
     sliderBlockLayer.position = CGPointMake(0.0, 0.0);
     sliderBlockLayer.anchorPoint = CGPointMake(0.5, 0.5);
-    sliderBlockLayer.frame = CGRectMake(300, 452, 60, 258);
+    sliderBlockLayer.frame = CGRectMake(-1050, 452, 2124, 258);
     [self.view.layer addSublayer:sliderBlockLayer];
     [sliderBlockLayer setNeedsDisplay];
     
@@ -109,6 +110,10 @@
             [rightArrowView setHidden:NO];
         }
         [self contentPanelRightMoveOutAnimation];
+        sliderBlockLayer.yearValue = articleModel.yearValue;
+        [sliderBlockLayer setNeedsDisplay];
+        int animToValue = (articleModel.yearValue - minYear) * percentageOfAxis;
+        [self slideBlockAnim:animToValue];
     }
     
 }
@@ -139,6 +144,11 @@
             [leftArrowView setHidden:NO];
         }
         [self contentPanelLeftMoveOutAnimation];
+        sliderBlockLayer.yearValue = articleModel.yearValue;
+         [sliderBlockLayer setNeedsDisplay];
+        int animToValue = (articleModel.yearValue - minYear )* percentageOfAxis;
+        [self slideBlockAnim:animToValue];
+        
     }
     
 }
@@ -313,6 +323,18 @@
     [CATransaction commit];
 }
 
+-(void)slideBlockAnim:(float) toValue
+{
+    [sliderBlockLayer pop_removeAllAnimations];
+    POPBasicAnimation *animBlock1 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
+    NSLog(@"%f",toValue);
+    animBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(toValue + 12.0, sliderBlockLayer.position.y)];
+    
+    animBlock1.duration = 2.0;
+    
+    [sliderBlockLayer pop_addAnimation:animBlock1 forKey:@"Animation"];
+}
+
 -(void) initTestData
 {
     countNum = 0;
@@ -321,37 +343,55 @@
     ArticleModel *articleModel = [ArticleModel new];
     articleModel.imagePath = @"historyContentPic";
     articleModel.titleText = @"[元朝书院]";
-    articleModel.timeText = @"公元216年";
+    articleModel.yearValue = 216;
     articleModel.contentText = @"216年始建于长沙城河西";
     [dataArray addObject:articleModel];
     
     articleModel = [ArticleModel new];
     articleModel.imagePath = @"historyContentPic";
     articleModel.titleText = @"[岳麓山]";
-    articleModel.timeText = @"公元1216年";
-    articleModel.contentText = @"216年始建于长沙城河西";
+    articleModel.yearValue = 1216;
+    articleModel.contentText = @"1216年始建于长沙城河西";
     [dataArray addObject:articleModel];
     
     articleModel = [ArticleModel new];
     articleModel.imagePath = @"historyContentPic";
     articleModel.titleText = @"[湖南大学]";
-    articleModel.timeText = @"公元1902年";
-    articleModel.contentText = @"216年始建于长沙城河西岳麓山大学城";
+    articleModel.yearValue = 1902;
+    articleModel.contentText = @"1902年始建于长沙城河西岳麓山大学城";
     [dataArray addObject:articleModel];
     
     articleModel = [ArticleModel new];
     articleModel.imagePath = @"historyContentPic";
     articleModel.titleText = @"[湖南师范大学]";
-    articleModel.timeText = @"公元1922年";
-    articleModel.contentText = @"216年始建于长沙城河西岳麓山大学城";
+    articleModel.yearValue = 1922;
+    articleModel.contentText = @"1922年始建于长沙城河西岳麓山大学城";
     [dataArray addObject:articleModel];
     
     articleModel = [ArticleModel new];
     articleModel.imagePath = @"historyContentPic";
     articleModel.titleText = @"[中南大学]";
-    articleModel.timeText = @"公元1932年";
-    articleModel.contentText = @"216年始建于长沙城河西岳麓山大学城";
+    articleModel.yearValue = 1932;
+    articleModel.contentText = @"1932年始建于长沙城河西岳麓山大学城";
     [dataArray addObject:articleModel];
+    
+    maxYear = 0;
+    minYear = ((ArticleModel *)dataArray[0]).yearValue;
+    
+    for (ArticleModel *articleModel in dataArray)
+    {
+        if (minYear > articleModel.yearValue)
+        {
+            minYear = articleModel.yearValue;
+        }
+        
+        if (maxYear < articleModel.yearValue)
+        {
+            maxYear = articleModel.yearValue;
+        }
+    }
+    
+    percentageOfAxis =  864.0 / (maxYear - minYear);
     
     if ([dataArray count] == 0)
     {
