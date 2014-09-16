@@ -116,6 +116,73 @@
     mainScrollView.scrollEnabled = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setScrollToEnabled:) name:@"SET_SCRILLVIEW_SCROLL_ENABLE" object:nil];
+    
+    menuView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 80)];
+    menuView.backgroundColor = [UIColor whiteColor];
+    menuView.layer.opacity = 0.9;
+    [self.view addSubview:menuView];
+    
+    UIButton *historyBtn = [[UIButton alloc] initWithFrame:CGRectMake(330, 10, 80, 50)];
+    [historyBtn setTitle:@"历史" forState:UIControlStateNormal];
+    historyBtn.titleLabel.font = [UIFont systemFontOfSize:28];
+    [historyBtn setTitleColor:[UIColor colorWithRed:254 green:0 blue:0 alpha:1] forState:UIControlStateNormal];
+    [historyBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [menuView addSubview:historyBtn];
+    [historyBtn addTarget:self action:@selector(historyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *sceneBtn = [[UIButton alloc] initWithFrame:CGRectMake(420, 10, 80, 50)];
+    [sceneBtn setTitle:@"景趣" forState:UIControlStateNormal];
+    sceneBtn.titleLabel.font = [UIFont systemFontOfSize:28];
+    [sceneBtn setTitleColor:[UIColor colorWithRed:254 green:0 blue:0 alpha:1] forState:UIControlStateNormal];
+    [sceneBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [menuView addSubview:sceneBtn];
+    [historyBtn addTarget:self action:@selector(sceneBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *humanityBtn = [[UIButton alloc] initWithFrame:CGRectMake(524, 10, 80, 50)];
+    [humanityBtn setTitle:@"人文" forState:UIControlStateNormal];
+    humanityBtn.titleLabel.font = [UIFont systemFontOfSize:28];
+    [humanityBtn setTitleColor:[UIColor colorWithRed:254 green:0 blue:0 alpha:1] forState:UIControlStateNormal];
+    [humanityBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [menuView addSubview:humanityBtn];
+    [historyBtn addTarget:self action:@selector(humanityBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *storyBtn = [[UIButton alloc] initWithFrame:CGRectMake(614, 10, 80, 50)];
+    [storyBtn setTitle:@"物象" forState:UIControlStateNormal];
+    storyBtn.titleLabel.font = [UIFont systemFontOfSize:28];
+    [storyBtn setTitleColor:[UIColor colorWithRed:254 green:0 blue:0 alpha:1] forState:UIControlStateNormal];
+    [storyBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [menuView addSubview:storyBtn];
+    [historyBtn addTarget:self action:@selector(storyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    CALayer *bottomLine = [CALayer layer];
+    bottomLine.backgroundColor = [[UIColor colorWithRed:254.0 green:0 blue:0 alpha:1] CGColor];
+    bottomLine.position = CGPointZero;
+    bottomLine.anchorPoint = CGPointMake(0.5, 0.5);
+    bottomLine.bounds = CGRectMake(0, 0, 80, 5);
+    bottomLine.frame = CGRectMake(330, 55, 80, 5);
+    [menuView.layer addSublayer:bottomLine];
+    
+    menuView.hidden = YES;
+}
+
+-(void)historyBtnClick:(id)sender
+{
+
+}
+
+-(void)sceneBtnClick:(id)sender
+{
+    
+}
+
+-(void)humanityBtnClick:(id)sender
+{
+    
+}
+
+-(void)storyBtnClick:(id)sender
+{
+    
 }
 
 -(void)setScrollToEnabled:(NSNotification *)aNotification
@@ -141,6 +208,16 @@
 {
     newContentOffsetY = _scrollView.contentOffset.y;
    
+    if (newContentOffsetY > 1536)
+    {
+        menuView.hidden = NO;
+    }
+    
+    if (newContentOffsetY < 1536)
+    {
+        menuView.hidden = YES;
+    }
+    
     if (newContentOffsetY > 400)
     {
         [recommandViewController initContentFlyIn];
@@ -175,20 +252,7 @@
     {
         [sceneViewController initContentFlyIn];
     }
-    /*
-    if (newContentOffsetY >= 568 && newContentOffsetY <= 1236)
-    {
-        [homeViewController addArticleDirectionView];
-        [homeViewController addAnimForDirectionView];
-    }
-    else if (newContentOffsetY >= 1536 || newContentOffsetY <= 100)
-    {
-        if (homeViewController.isAddDirectionView)
-        {
-            [homeViewController hideAllArticleDirectionView];
-        }
-    }
-     */
+    
 }
 
 -(void) dealloc

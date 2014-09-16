@@ -25,5 +25,9 @@
     BOOL rightSign;
     
     UIPageControl *pageController;
+    
+    NSMutableArray *articleArray;
+    int pageNum;
+    int currentPage;
 }
 @end

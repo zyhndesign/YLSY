@@ -48,73 +48,35 @@
     UITapGestureRecognizer *rightGesture = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(rightArrowTapClick:)];
     [rightArrowView addGestureRecognizer:rightGesture];
     
-    NSMutableArray *array = [NSMutableArray new];
-    ArticleModel *articleModel= [ArticleModel new];
-    articleModel.articleId = 1;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 2;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 3;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 4;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 5;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 6;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 7;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 8;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 9;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 10;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 11;
-    [array addObject:articleModel];
-    
-    articleModel= [ArticleModel new];
-    articleModel.articleId = 12;
-    [array addObject:articleModel];
     
     contentView1 = [[StoryContentView alloc] initWithFrame:CGRectMake(100, 150, 850, 560) andController:self] ;
     contentView1.backgroundColor = [UIColor clearColor];
-    contentView1.articleArray = array;
+    contentView1.articleArray = articleArray;
     contentView1ISBack = NO;
     [self.view addSubview:contentView1];
     
     contentView2 = [[StoryContentView alloc] initWithFrame:CGRectMake(100, 150, 850, 560) andController:self];
     contentView2.backgroundColor = [UIColor clearColor];
-    contentView2.articleArray = array;
+    contentView2.articleArray = articleArray;
     contentView2.transform = CGAffineTransformMakeScale(0.5, 0.5);
     contentView2.hidden = YES;
     contentView2ISBack = YES;
     [self.view addSubview:contentView2];
     
+    if ([articleArray count] % 15 == 0)
+    {
+        pageNum = [articleArray count] / 15;
+    }
+    else
+    {
+        pageNum = [articleArray count] / 15 + 1;
+    }
+    currentPage = 0;
+    
     pageController = [[UIPageControl alloc] init];
     pageController.center = CGPointMake(self.view.center.x, 700);
-    pageController.numberOfPages = 10;
-    pageController.currentPage = 0;
+    pageController.numberOfPages = pageNum;
+    pageController.currentPage = currentPage;
     pageController.pageIndicatorTintColor = [UIColor grayColor];
     pageController.currentPageIndicatorTintColor = [UIColor colorWithRed:254 green:0 blue:0 alpha:1];
     [self.view addSubview:pageController];
@@ -133,16 +95,16 @@
         [self executeLeftButtonAnimOfFrontView:contentView2 AndBackView:contentView1];
         leftSign = NO;
     }
+    --currentPage;
 }
 
 -(void) executeLeftButtonAnimOfFrontView:(UIView *)view1 AndBackView:(UIView *)view2
 {
     [leftArrowView setUserInteractionEnabled:NO];
     [view1 pop_removeAllAnimations];
-    POPSpringAnimation *animBlock1 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+    POPBasicAnimation *animBlock1 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
     animBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(1455, view1.center.y)];
-    animBlock1.springSpeed = 1;
-    animBlock1.springBounciness = 0;
+    animBlock1.duration = 0.3;
     [animBlock1 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
         view1.hidden = YES;
         view1.transform = CGAffineTransformMakeScale(0.5, 0.5);
@@ -156,6 +118,7 @@
         {
             contentView2ISBack = YES;
         }
+         NSLog(@"anim1 is done...");
     }];
     [view1.layer pop_addAnimation:animBlock1 forKey:@"Animation"];
     
@@ -174,6 +137,7 @@
             contentView1ISBack = NO;
         }
         [leftArrowView setUserInteractionEnabled:YES];
+         NSLog(@"anim2 is done...");
     }];
     [view2.layer pop_addAnimation:animBlock2 forKey:@"Animation"];
 }
@@ -197,10 +161,9 @@
 {
     [view1 pop_removeAllAnimations];
     [rightArrowView setUserInteractionEnabled:NO];
-    POPSpringAnimation *animBlock1 = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+    POPBasicAnimation *animBlock1 = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
     animBlock1.toValue = [NSValue valueWithCGPoint:CGPointMake(-575, view1.center.y)];
-    animBlock1.springSpeed = 1;
-    animBlock1.springBounciness = 0;
+    animBlock1.duration = 0.3;
     [animBlock1 setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
         view1.hidden = YES;
         view1.transform = CGAffineTransformMakeScale(0.5, 0.5);
@@ -213,6 +176,7 @@
         {
             contentView2ISBack = YES;
         }
+        NSLog(@"anim1 is done...");
     }];
     [view1.layer pop_addAnimation:animBlock1 forKey:@"Animation"];
     
@@ -231,8 +195,89 @@
             contentView1ISBack = NO;
         }
         [rightArrowView setUserInteractionEnabled:YES];
+        NSLog(@"anim2 is done...");
     }];
     [view2.layer pop_addAnimation:animBlock2 forKey:@"Animation"];
+}
+
+-(void) initData
+{
+    articleArray = [NSMutableArray new];
+    ArticleModel *articleModel= [ArticleModel new];
+    articleModel.articleId = 1;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 2;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 3;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 4;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 5;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 6;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 7;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 8;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 9;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 10;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 11;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 12;
+    [articleArray addObject:articleModel];
+
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 13;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 14;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 15;
+    [articleArray addObject:articleModel];
+    /*
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 16;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 17;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 18;
+    [articleArray addObject:articleModel];
+    
+    articleModel= [ArticleModel new];
+    articleModel.articleId = 19;
+    [articleArray addObject:articleModel];*/
 }
 
 - (void)didReceiveMemoryWarning

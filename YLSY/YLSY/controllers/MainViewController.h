@@ -41,6 +41,8 @@
     CGFloat newContentOffsetY;
     
     int viewHeight;
+    
+    UIView *menuView;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *mainScrollView;
 
