@@ -87,12 +87,23 @@
     [self.view addSubview:historyThumbView];
     
     [self initTestData];
-        
+    
+    //-------------------------------------------------------------------------------
+    //添加手势识别
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] init];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeLeft];
+    [swipeLeft addTarget:self action:@selector(leftArrowImageClick:)];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] init];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeRight];
+    [swipeRight addTarget:self action:@selector(rightArrowImageClick:)];
 }
 
 -(void)leftArrowImageClick:(UIGestureRecognizer *)gesture
 {
-    if ([dataArray count] > 0)
+    if ([dataArray count] > 0 && countNum > 0)
     {
         --countNum;
         

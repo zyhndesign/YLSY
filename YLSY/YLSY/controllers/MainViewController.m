@@ -204,15 +204,31 @@
     return NO;
 }
 
--(void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
+-(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    oldContentOffsetY = scrollView.contentOffset.y;
+    float offsetY = scrollView.contentOffset.y;
+    if (offsetY > 1536 && offsetY < 3072)
+    {
+        [self bottomLineAnimation:370];
+    }
+    else if (offsetY > 3072 && offsetY < 4608)
+    {
+        [self bottomLineAnimation:460];
+    }
+    else if (offsetY > 4608 && offsetY < 6144)
+    {
+        [self bottomLineAnimation:564];
+    }
+    else if (offsetY > 6144)
+    {
+        [self bottomLineAnimation:654];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
 {
     newContentOffsetY = _scrollView.contentOffset.y;
-   
+    
     if (newContentOffsetY > 1536)
     {
         if ([menuView isHidden])
@@ -287,7 +303,7 @@
     [bottomLine pop_removeAllAnimations];
     POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
     anim.toValue = [NSValue valueWithCGPoint:CGPointMake(toValue, 55.0)];
-    anim.duration = 1.0;
+    anim.duration = 0.5;
     [bottomLine pop_addAnimation:anim forKey:@"centerAnimation"];
 }
 

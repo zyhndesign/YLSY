@@ -78,6 +78,18 @@
     [self.view addSubview:pageController];
     
     firstInit = YES;
+    
+    //-------------------------------------------------------------------------------
+    //添加手势识别
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] init];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeLeft];
+    [swipeLeft addTarget:self action:@selector(leftClick:)];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] init];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeRight];
+    [swipeRight addTarget:self action:@selector(rightClick:)];
 }
 
 -(void) initContentFlyIn

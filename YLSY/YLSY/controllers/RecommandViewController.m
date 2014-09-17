@@ -98,6 +98,18 @@
     [self.view addSubview:pageController];
     
     leftArrowView.hidden = YES;
+    
+    //-------------------------------------------------------------------------------
+    //添加手势识别
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] init];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeLeft];
+    [swipeLeft addTarget:self action:@selector(leftTap:)];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] init];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeRight];
+    [swipeRight addTarget:self action:@selector(rightTap:)];
 }
 
 -(void)articleTap:(UIGestureRecognizer *) gesture
@@ -117,7 +129,8 @@
         firstInit = NO;
         [self springAnim:oneThumbView andPosition:290];
         [self springAnim:twoThumbView andPosition:520];
-        [self springAnim:threeThumbView andPosition:750];    }
+        [self springAnim:threeThumbView andPosition:750];
+    }
     
 }
 

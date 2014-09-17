@@ -80,6 +80,18 @@
     pageController.pageIndicatorTintColor = [UIColor grayColor];
     pageController.currentPageIndicatorTintColor = [UIColor colorWithRed:254 green:0 blue:0 alpha:1];
     [self.view addSubview:pageController];
+    
+    //-------------------------------------------------------------------------------
+    //添加手势识别
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] init];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeLeft];
+    [swipeLeft addTarget:self action:@selector(leftArrowTapClick:)];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] init];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeRight];
+    [swipeRight addTarget:self action:@selector(rightArrowTapClick:)];
 }
 
 -(void)leftArrowTapClick:(UIGestureRecognizer *)gesture
