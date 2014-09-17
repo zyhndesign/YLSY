@@ -43,6 +43,8 @@
     int viewHeight;
     
     UIView *menuView;
+    
+    CALayer *bottomLine;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *mainScrollView;
 

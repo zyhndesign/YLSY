@@ -18,6 +18,7 @@
 #import "StoryTopViewController.h"
 #import "StoryViewController.h"
 #import "BottomViewController.h"
+#import "../libs/pop/POPBasicAnimation.h"
 
 @interface MainViewController ()
 
@@ -117,10 +118,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setScrollToEnabled:) name:@"SET_SCRILLVIEW_SCROLL_ENABLE" object:nil];
     
-    menuView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 80)];
+    menuView = [[UIView alloc] initWithFrame:CGRectMake(0, -80, 1024, 80)];
     menuView.backgroundColor = [UIColor whiteColor];
     menuView.layer.opacity = 0.9;
-    [self.view addSubview:menuView];
     
     UIButton *historyBtn = [[UIButton alloc] initWithFrame:CGRectMake(330, 10, 80, 50)];
     [historyBtn setTitle:@"历史" forState:UIControlStateNormal];
@@ -136,7 +136,7 @@
     [sceneBtn setTitleColor:[UIColor colorWithRed:254 green:0 blue:0 alpha:1] forState:UIControlStateNormal];
     [sceneBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [menuView addSubview:sceneBtn];
-    [historyBtn addTarget:self action:@selector(sceneBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [sceneBtn addTarget:self action:@selector(sceneBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *humanityBtn = [[UIButton alloc] initWithFrame:CGRectMake(524, 10, 80, 50)];
     [humanityBtn setTitle:@"人文" forState:UIControlStateNormal];
@@ -144,7 +144,7 @@
     [humanityBtn setTitleColor:[UIColor colorWithRed:254 green:0 blue:0 alpha:1] forState:UIControlStateNormal];
     [humanityBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [menuView addSubview:humanityBtn];
-    [historyBtn addTarget:self action:@selector(humanityBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [humanityBtn addTarget:self action:@selector(humanityBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *storyBtn = [[UIButton alloc] initWithFrame:CGRectMake(614, 10, 80, 50)];
     [storyBtn setTitle:@"物象" forState:UIControlStateNormal];
@@ -152,9 +152,9 @@
     [storyBtn setTitleColor:[UIColor colorWithRed:254 green:0 blue:0 alpha:1] forState:UIControlStateNormal];
     [storyBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [menuView addSubview:storyBtn];
-    [historyBtn addTarget:self action:@selector(storyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [storyBtn addTarget:self action:@selector(storyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    CALayer *bottomLine = [CALayer layer];
+    bottomLine = [CALayer layer];
     bottomLine.backgroundColor = [[UIColor colorWithRed:254.0 green:0 blue:0 alpha:1] CGColor];
     bottomLine.position = CGPointZero;
     bottomLine.anchorPoint = CGPointMake(0.5, 0.5);
@@ -162,27 +162,32 @@
     bottomLine.frame = CGRectMake(330, 55, 80, 5);
     [menuView.layer addSublayer:bottomLine];
     
+    [self.view addSubview:menuView];
     menuView.hidden = YES;
 }
 
 -(void)historyBtnClick:(id)sender
 {
-
+    [mainScrollView setContentOffset:CGPointMake(mainScrollView.frame.origin.x, 1536) animated:YES];
+    [self bottomLineAnimation:370];
 }
 
 -(void)sceneBtnClick:(id)sender
 {
-    
+    [mainScrollView setContentOffset:CGPointMake(mainScrollView.frame.origin.x, 3072) animated:YES];
+    [self bottomLineAnimation:460];
 }
 
 -(void)humanityBtnClick:(id)sender
 {
-    
+    [mainScrollView setContentOffset:CGPointMake(mainScrollView.frame.origin.x, 4608) animated:YES];
+    [self bottomLineAnimation:564];
 }
 
 -(void)storyBtnClick:(id)sender
 {
-    
+    [mainScrollView setContentOffset:CGPointMake(mainScrollView.frame.origin.x, 6144) animated:YES];
+    [self bottomLineAnimation:654];
 }
 
 -(void)setScrollToEnabled:(NSNotification *)aNotification
@@ -210,12 +215,35 @@
    
     if (newContentOffsetY > 1536)
     {
-        menuView.hidden = NO;
+        if ([menuView isHidden])
+        {
+            menuView.hidden = NO;
+            
+            [menuView pop_removeAllAnimations];
+            POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPViewCenter];
+            anim.toValue = [NSValue valueWithCGPoint:CGPointMake(512, 40.0)];
+            anim.duration = 1.5;
+            [menuView pop_addAnimation:anim forKey:@"centerAnimation"];
+        }
+        
     }
     
     if (newContentOffsetY < 1536)
     {
-        menuView.hidden = YES;
+        if (![menuView isHidden])
+        {
+            [menuView pop_removeAllAnimations];
+            POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPViewCenter];
+            anim.toValue = [NSValue valueWithCGPoint:CGPointMake(512, -40.0)];
+            anim.duration = 1.0;
+            [anim setCompletionBlock:^(POPAnimation *anim, BOOL isFinish) {
+                if (isFinish)
+                {
+                    menuView.hidden = YES;
+                }
+            }];
+            [menuView pop_addAnimation:anim forKey:@"centerAnimation"];
+        }
     }
     
     if (newContentOffsetY > 400)
@@ -252,7 +280,15 @@
     {
         [sceneViewController initContentFlyIn];
     }
-    
+}
+
+-(void) bottomLineAnimation:(float) toValue
+{
+    [bottomLine pop_removeAllAnimations];
+    POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPosition];
+    anim.toValue = [NSValue valueWithCGPoint:CGPointMake(toValue, 55.0)];
+    anim.duration = 1.0;
+    [bottomLine pop_addAnimation:anim forKey:@"centerAnimation"];
 }
 
 -(void) dealloc
